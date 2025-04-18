@@ -36,11 +36,12 @@
     function goToAd() {
       window.open("https://gplinks.co/SEULINKAQUI", "_blank");
       localStorage.setItem("adViewed", "yes");
+      localStorage.removeItem("keyGenerated"); // Permite gerar uma nova chave
     }
 
     function generateKey() {
       if (localStorage.getItem("keyGenerated") === "yes") {
-        alert("Você já gerou uma chave.");
+        alert("Você já gerou uma chave. Clique em Go to Ad para gerar outra.");
         return;
       }
 
@@ -48,6 +49,7 @@
         const key = "KEY-" + Math.random().toString(36).substring(2, 10).toUpperCase();
         document.getElementById("keyDisplay").textContent = "Sua chave: " + key;
         localStorage.setItem("keyGenerated", "yes");
+        localStorage.removeItem("adViewed"); // Precisa ver outro anúncio depois
       } else {
         alert("Por favor, veja o anúncio primeiro!");
       }
