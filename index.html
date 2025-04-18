@@ -1,53 +1,58 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Bots Up - Key System</title>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+  <meta charset="UTF-8">
+  <title>Free Reward Key</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding: 20px;
+      background: #f1f7f5;
+    }
+    .button {
+      background-color: #2979ff;
+      color: white;
+      border: none;
+      padding: 15px 20px;
+      font-size: 16px;
+      border-radius: 8px;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-  <h2>Gerar Key</h2>
-  <button onclick="gerarKey()">Gerar Key</button>
-  <p id="novaKey"></p>
 
-  <h2>Validar Key</h2>
-  <input type="text" id="inputKey" placeholder="Digite sua key">
-  <button onclick="validarKey()">Validar</button>
-  <p id="resultado"></p>
+  <h2>Get Your Free Reward Key</h2>
+
+  <button class="button" onclick="goToAd()">Go to Ad</button>
+  <br>
+  <button class="button" onclick="generateKey()">Generate Key</button>
+
+  <p id="keyDisplay"></p>
 
   <script>
-    // Config Firebase
-    const firebaseConfig = {
-      apiKey: "SUA_API_KEY",
-      authDomain: "SEU_PROJETO.firebaseapp.com",
-      databaseURL: "https://SEU_PROJETO.firebaseio.com",
-      projectId: "SEU_PROJETO",
-      storageBucket: "SEU_PROJETO.appspot.com",
-      messagingSenderId: "SENDER_ID",
-      appId: "APP_ID"
-    };
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.database();
-
-    // Função para gerar uma key
-    function gerarKey() {
-      const key = Math.random().toString(36).substring(2, 10).toUpperCase();
-      db.ref('keys/' + key).set({ ativa: true });
-      document.getElementById('novaKey').innerText = 'Nova Key: ' + key;
+    function goToAd() {
+      window.open("https://gplinks.co/SEULINKAQUI", "_blank");
+      localStorage.setItem("adViewed", "yes");
     }
 
-    // Função para validar uma key
-    function validarKey() {
-      const key = document.getElementById('inputKey').value.trim().toUpperCase();
-      db.ref('keys/' + key).once('value', (snap) => {
-        if (snap.exists() && snap.val().ativa) {
-          db.ref('keys/' + key).update({ ativa: false });
-          document.getElementById('resultado').innerText = 'Key VÁLIDA!';
-        } else {
-          document.getElementById('resultado').innerText = 'Key inválida ou já usada.';
-        }
-      });
+    function generateKey() {
+      if (localStorage.getItem("keyGenerated") === "yes") {
+        alert("Você já gerou uma chave.");
+        return;
+      }
+
+      if (localStorage.getItem("adViewed") === "yes") {
+        const key = "KEY-" + Math.random().toString(36).substring(2, 10).toUpperCase();
+        document.getElementById("keyDisplay").textContent = "Sua chave: " + key;
+        localStorage.setItem("keyGenerated", "yes");
+      } else {
+        alert("Por favor, veja o anúncio primeiro!");
+      }
     }
   </script>
+
 </body>
 </html>
