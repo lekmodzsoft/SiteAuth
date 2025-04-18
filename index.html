@@ -1,68 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Free Reward Key</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      background: #f0f9f7;
-      margin: 0;
-      padding: 20px;
-      text-align: center;
-    }
-
-    h3 {
-      text-decoration: underline;
-      margin-bottom: 30px;
-    }
-
-    .box {
-      background: #d1e7d5;
-      padding: 20px;
-      border-radius: 10px;
-      margin-bottom: 20px;
-    }
-
-    .box2 {
-      background: #d1ecf1;
-      padding: 20px;
-      border-radius: 10px;
-      margin-bottom: 20px;
-    }
-
-    .button {
-      background-color: #2d6cdf;
-      color: white;
-      padding: 12px 18px;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
-      margin-top: 10px;
-    }
-
-    .note {
-      margin-top: 20px;
-      font-size: 15px;
-    }
-  </style>
+  <title>Bots Up - Key System</title>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
 </head>
 <body>
+  <h2>Gerar Key</h2>
+  <button onclick="gerarKey()">Gerar Key</button>
+  <p id="novaKey"></p>
 
-  <h3>Site Opened from Mobile</h3>
+  <h2>Validar Key</h2>
+  <input type="text" id="inputKey" placeholder="Digite sua key">
+  <button onclick="validarKey()">Validar</button>
+  <p id="resultado"></p>
 
-  <div class="box">
-    <h2>Get Your Free Reward!</h2>
-    <p>3page ads →</p>
-    <button class="button">Get Your Free Reward Key</button>
-  </div>
+  <script>
+    // Config Firebase
+    const firebaseConfig = {
+      apiKey: "SUA_API_KEY",
+      authDomain: "SEU_PROJETO.firebaseapp.com",
+      databaseURL: "https://SEU_PROJETO.firebaseio.com",
+      projectId: "SEU_PROJETO",
+      storageBucket: "SEU_PROJETO.appspot.com",
+      messagingSenderId: "SENDER_ID",
+      appId: "APP_ID"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
 
-  <div class="box2">
-    <button class="button">How to get Free Reward key Video Tutorial</button>
-  </div>
+    // Função para gerar uma key
+    function gerarKey() {
+      const key = Math.random().toString(36).substring(2, 10).toUpperCase();
+      db.ref('keys/' + key).set({ ativa: true });
+      document.getElementById('novaKey').innerText = 'Nova Key: ' + key;
+    }
 
-  <p class="note">3page ads reward key are now more than 2hrs key</p>
-
+    // Função para validar uma key
+    function validarKey() {
+      const key = document.getElementById('inputKey').value.trim().toUpperCase();
+      db.ref('keys/' + key).once('value', (snap) => {
+        if (snap.exists() && snap.val().ativa) {
+          db.ref('keys/' + key).update({ ativa: false });
+          document.getElementById('resultado').innerText = 'Key VÁLIDA!';
+        } else {
+          document.getElementById('resultado').innerText = 'Key inválida ou já usada.';
+        }
+      });
+    }
+  </script>
 </body>
 </html>
