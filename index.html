@@ -10,6 +10,7 @@
       padding: 20px;
       background: #f1f7f5;
     }
+
     .button {
       background-color: #2979ff;
       color: white;
@@ -19,6 +20,37 @@
       border-radius: 8px;
       margin-top: 20px;
       cursor: pointer;
+    }
+
+    /* Estilo do modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.5);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 300px;
+      text-align: center;
+    }
+
+    #keyText {
+      font-size: 18px;
+      margin-bottom: 20px;
+      word-break: break-all;
+    }
+
+    .close-btn {
+      background: #ccc;
+      margin-top: 10px;
     }
   </style>
 </head>
@@ -30,13 +62,22 @@
   <br>
   <button class="button" onclick="generateKey()">Generate Key</button>
 
-  <p id="keyDisplay"></p>
+  <!-- Modal -->
+  <div id="keyModal" class="modal">
+    <div class="modal-content">
+      <p id="keyText"></p>
+      <button class="button" onclick="copyKey()">Copiar chave</button>
+      <button class="button close-btn" onclick="closeModal()">Fechar</button>
+    </div>
+  </div>
 
   <script>
+    let currentKey = "";
+
     function goToAd() {
       window.open("https://gplinks.co/SEULINKAQUI", "_blank");
       localStorage.setItem("adViewed", "yes");
-      localStorage.removeItem("keyGenerated"); // Permite gerar uma nova chave
+      localStorage.removeItem("keyGenerated");
     }
 
     function generateKey() {
@@ -46,13 +87,24 @@
       }
 
       if (localStorage.getItem("adViewed") === "yes") {
-        const key = "KEY-" + Math.random().toString(36).substring(2, 10).toUpperCase();
-        document.getElementById("keyDisplay").textContent = "Sua chave: " + key;
+        currentKey = "KEY-" + Math.random().toString(36).substring(2, 10).toUpperCase();
+        document.getElementById("keyText").textContent = "Sua chave: " + currentKey;
+        document.getElementById("keyModal").style.display = "flex";
         localStorage.setItem("keyGenerated", "yes");
-        localStorage.removeItem("adViewed"); // Precisa ver outro anúncio depois
+        localStorage.removeItem("adViewed");
       } else {
         alert("Por favor, veja o anúncio primeiro!");
       }
+    }
+
+    function closeModal() {
+      document.getElementById("keyModal").style.display = "none";
+    }
+
+    function copyKey() {
+      navigator.clipboard.writeText(currentKey).then(() => {
+        alert("Chave copiada!");
+      });
     }
   </script>
 
