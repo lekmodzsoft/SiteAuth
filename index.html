@@ -3,75 +3,134 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Coin Master</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: Arial, sans-serif;
+    * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      font-family: 'Roboto', sans-serif;
+    }
+    body {
+      background-color: #fff;
+      color: #000;
+    }
+    .status-bar {
       background: #fff;
-    }
-    header {
-      display: flex;
-      align-items: center;
-      padding: 10px;
-      background-color: #f1f1f1;
-    }
-    header img {
-      width: 64px;
-      height: 64px;
-      border-radius: 16px;
-      margin-right: 10px;
-    }
-    .app-title {
-      font-size: 24px;
-      margin: 0;
-    }
-    .developer {
       font-size: 14px;
+      padding: 8px 12px;
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid #ccc;
+    }
+    .header {
+      display: flex;
+      padding: 16px;
+      gap: 16px;
+    }
+    .header img {
+      width: 72px;
+      height: 72px;
+      border-radius: 20px;
+    }
+    .header-info {
+      flex: 1;
+    }
+    .header-info h1 {
+      font-size: 20px;
+      font-weight: bold;
+    }
+    .header-info p {
       color: #555;
+      font-size: 14px;
+      margin-top: 4px;
+    }
+    .rating-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 16px;
+      margin-top: 8px;
+      font-size: 14px;
     }
     .install-button {
-      margin: 20px;
-      padding: 12px 20px;
+      margin: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .install-button button {
+      background: #1a73e8;
+      color: #fff;
+      padding: 10px 16px;
       font-size: 16px;
-      background-color: #1a73e8;
-      color: white;
       border: none;
       border-radius: 8px;
-      cursor: pointer;
     }
-    .video-preview img {
+    .preview {
+      padding: 0 16px;
+    }
+    .preview img {
       width: 100%;
-      max-width: 400px;
       border-radius: 12px;
+      margin-bottom: 8px;
     }
     .section {
-      padding: 20px;
+      padding: 16px;
+    }
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
     }
     .tags span {
-      display: inline-block;
-      margin: 4px;
-      padding: 6px 12px;
-      background-color: #eee;
-      border-radius: 16px;
-      font-size: 14px;
+      background: #f0f0f0;
+      padding: 8px 12px;
+      border-radius: 20px;
+      font-size: 13px;
+    }
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #f8f8f8;
+      border-top: 1px solid #ccc;
+      display: flex;
+      justify-content: space-around;
+      padding: 8px 0;
+      font-size: 12px;
+    }
+    .bottom-nav div {
+      text-align: center;
     }
   </style>
 </head>
 <body>
-  <header>
-    <img src="https://play-lh.googleusercontent.com/XI4eMygNMDzAfagZ9uL_V2T-cXJpgLwvEq_6ivq3Nqugs_sQwYXJScbWKHFSJXKpPw=w240-h480-rw" alt="Coin Master">
+  <div class="status-bar">
+    <div>05:21</div>
     <div>
-      <h1 class="app-title">Coin Master</h1>
-      <p class="developer">Moon Active · Contém anúncios · Compras no app</p>
-      <p>Classificação: 4,7 ★ (9 mi avaliações)</p>
-      <p>Tamanho: 95 MB · Classificação Livre</p>
+      <span>◉◉</span>
+      <span>Wi-Fi</span>
+      <span>17%</span>
     </div>
-  </header>  <div class="section">
-    <button class="install-button">Instalar</button>
-    <p>Instalar em smartphone. Mais dispositivos estão disponíveis.</p>
-  </div>  <div class="section video-preview">
-    <img src="https://play-lh.googleusercontent.com/abpSzDPm78dF2MGy1Sh3WZxRx0c3smwl0GlP5pqVZz7ZqV8TLHep0xDOKUWEayokYDY=w526-h296-rw" alt="Coin Master Video Preview">
+  </div>  <div class="header">
+    <img src="https://play-lh.googleusercontent.com/XI4eMygNMDzAfagZ9uL_V2T-cXJpgLwvEq_6ivq3Nqugs_sQwYXJScbWKHFSJXKpPw=w240-h480-rw" alt="Coin Master">
+    <div class="header-info">
+      <h1>Coin Master</h1>
+      <p>Moon Active</p>
+      <p>Contém anúncios · Compras no app</p>
+    </div>
+  </div>  <div class="rating-row">
+    <div>4,7 ★<br>9 mi avaliações</div>
+    <div>95 MB</div>
+    <div>Classificação Livre</div>
+  </div>  <div class="install-button">
+    <button>Instalar</button>
+    <span>▼</span>
+  </div>  <div class="preview">
+    <img src="https://play-lh.googleusercontent.com/abpSzDPm78dF2MGy1Sh3WZxRx0c3smwl0GlP5pqVZz7ZqV8TLHep0xDOKUWEayokYDY=w526-h296-rw" alt="Video Preview">
+    <img src="https://play-lh.googleusercontent.com/vvO3QJpC1cQHdOUdABOrcbEBPRsMBdcP1wRkYowf0RPa7hUHoEqvAZMJDdYFo-Cyeg=w526-h296-rw" alt="Image 2">
   </div>  <div class="section">
     <h2>Sobre este jogo</h2>
     <p>Bem-vindo ao Coin Master! - Junte-se à aventura!</p>
@@ -82,6 +141,23 @@
       <span>Renovação</span>
       <span>Viking</span>
       <span>Um jogador</span>
+    </div>
+  </div>  <div class="bottom-nav">
+    <div>
+      <div>🎮</div>
+      <div>Jogos</div>
+    </div>
+    <div>
+      <div>◻️</div>
+      <div>Apps</div>
+    </div>
+    <div>
+      <div>🔍</div>
+      <div>Pesquisa</div>
+    </div>
+    <div>
+      <div>📚</div>
+      <div>Livros</div>
     </div>
   </div>
 </body>
