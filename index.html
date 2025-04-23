@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
+<!DOCTYPE html><html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -56,10 +55,24 @@
     }
     .rating-row {
       display: flex;
-      justify-content: space-between;
-      padding: 0 16px;
-      margin-top: 8px;
-      font-size: 14px;
+      justify-content: space-around;
+      align-items: center;
+      padding: 16px;
+      border-bottom: 1px solid #ccc;
+      text-align: center;
+    }
+    .rating-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 13px;
+      color: #333;
+    }
+    .rating-top {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 16px;
     }
     .install-button {
       margin: 24px auto;
@@ -69,13 +82,10 @@
     .install-button button {
       background: #1a73e8;
       color: #fff;
-      padding: 16px 40px;
+      padding: 14px 32px;
       font-size: 18px;
       border: none;
-      border-radius: 12px;
-      width: 80%;
-      max-width: 320px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
       cursor: pointer;
     }
     .preview {
@@ -133,36 +143,39 @@
       <span>Wi-Fi</span>
       <span>17%</span>
     </div>
-  </div>
-
-  <div class="header">
+  </div>  <div class="header">
     <img class="logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfSlFrg0SITqQly0KxKyN92Bw4s6Yqhnp0GcBNhn7enNe9rOEhEP7-zwX6&s=10" alt="Coin Master">
     <div class="header-info">
       <h1>
         Coin Master
-        <img src="https://thecloutmagazine.com/wp-content/uploads/2021/09/Legitly-Verified-Blue-Badge-top-page.png" alt="Verificado">
+        <img src="/mnt/data/file-VjuroQKRhWedCH9dPMEtR9" alt="Milho">
       </h1>
       <p>Moon Active</p>
       <p>Contém anúncios · Compras no app</p>
     </div>
-  </div>
+  </div>  <div class="rating-row">
+    <div class="rating-item">
+      <div class="rating-top">
+        <strong>4,7</strong>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Plain_Yellow_Star.png" alt="estrela" width="14">
+      </div>
+      <div class="rating-bottom">9 mi avaliações</div>
+    </div><div class="rating-item">
+  <img src="https://cdn-icons-png.flaticon.com/512/60/60525.png" alt="download" width="20">
+  <div class="rating-bottom">95 MB</div>
+</div>
 
-  <div class="rating-row">
-    <div>4,7 ★<br>9 mi avaliações</div>
-    <div>95 MB</div>
-    <div>Classificação Livre</div>
-  </div>
+<div class="rating-item">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/DJCTQ_-_L.svg/512px-DJCTQ_-_L.svg.png" alt="classificação livre" width="20">
+  <div class="rating-bottom">Classificação Livre</div>
+</div>
 
-  <div class="install-button">
+  </div>  <div class="install-button">
     <button>Instalar</button>
-  </div>
-
-  <div class="preview">
-    <iframe width="100%" height="220" src="https://www.youtube.com/embed/epVsK5bt9ZM" frameborder="0" allowfullscreen></iframe>
+  </div>  <div class="preview">
+    <iframe src="https://www.youtube.com/embed/epVsK5bt9ZM" allowfullscreen></iframe>
     <img src="https://play-lh.googleusercontent.com/vvO3QJpC1cQHdOUdABOrcbEBPRsMBdcP1wRkYowf0RPa7hUHoEqvAZMJDdYFo-Cyeg=w526-h296-rw" alt="Image 2">
-  </div>
-
-  <div class="section">
+  </div>  <div class="section">
     <h2>Sobre este jogo</h2>
     <p>Bem-vindo ao Coin Master! - Junte-se à aventura!</p>
     <div class="tags">
@@ -173,9 +186,7 @@
       <span>Viking</span>
       <span>Um jogador</span>
     </div>
-  </div>
-
-  <div class="bottom-nav">
+  </div>  <div class="bottom-nav">
     <div>
       <div>🎮</div>
       <div>Jogos</div>
