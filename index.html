@@ -1,177 +1,88 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html><html lang="pt-BR">
 <head>
-  <title>Gerador de Chave</title>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+  <title>Coin Master</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      text-align: center;
-      padding: 50px 10px;
-      background-color: #f0f0f5;
+      margin: 0;
+      padding: 0;
+      background: #fff;
     }
-
-    h2 {
-      color: #333;
+    header {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      background-color: #f1f1f1;
+    }
+    header img {
+      width: 64px;
+      height: 64px;
+      border-radius: 16px;
+      margin-right: 10px;
+    }
+    .app-title {
       font-size: 24px;
+      margin: 0;
     }
-
-    .button {
-      background-color: #2979ff;
-      color: white;
-      border: none;
-      padding: 20px 40px;
-      font-size: 20px;
-      border-radius: 10px;
-      margin: 20px 10px;
-      cursor: pointer;
-      width: 80%;
-      max-width: 300px;
+    .developer {
+      font-size: 14px;
+      color: #555;
     }
-
-    #status {
-      margin-top: 30px;
-      font-size: 18px;
-      color: #444;
-    }
-
-    .dialog {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      width: 90%;
-      max-width: 400px;
-      background: white;
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-      transform: translate(-50%, -50%);
-      z-index: 1000;
-    }
-
-    .dialog h3 {
-      margin-top: 0;
-    }
-
-    .dialog button {
-      margin-top: 20px;
+    .install-button {
+      margin: 20px;
       padding: 12px 20px;
       font-size: 16px;
-      border: none;
-      background-color: #2979ff;
+      background-color: #1a73e8;
       color: white;
+      border: none;
       border-radius: 8px;
       cursor: pointer;
     }
-
-    .overlay {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.5);
-      z-index: 999;
+    .video-preview img {
+      width: 100%;
+      max-width: 400px;
+      border-radius: 12px;
     }
-
-    footer {
-      margin-top: 60px;
+    .section {
+      padding: 20px;
+    }
+    .tags span {
+      display: inline-block;
+      margin: 4px;
+      padding: 6px 12px;
+      background-color: #eee;
+      border-radius: 16px;
       font-size: 14px;
-      color: #777;
     }
   </style>
 </head>
 <body>
-
-<h2>Obtenha sua Chave Premium</h2>
-<button class="button" onclick="irParaAnuncio()">Ir para Anúncio</button>
-<button class="button" onclick="gerarChave()">Gerar Chave</button>
-
-<p id="status">Siga os passos acima</p>
-
-<div class="overlay" id="overlay"></div>
-<div class="dialog" id="dialog">
-  <h3>Sua Chave</h3>
-  <p id="keyText" style="font-size: 20px; font-weight: bold;"></p>
-  <button onclick="copiarChave()">Copiar Chave</button>
-</div>
-
-<footer>
-  © LM SOFT 2025 - TODOS OS DIREITOS RESERVADOS
-</footer>
-
-<script>
-  const firebaseConfig = {
-    apiKey: "AIzaSyANPpEYbCsD2oD94jN0SdyivaJ8v4ouDHI",
-    authDomain: "authapp-42b96.firebaseapp.com",
-    databaseURL: "https://authapp-42b96-default-rtdb.firebaseio.com",
-    projectId: "authapp-42b96",
-    storageBucket: "authapp-42b96.appspot.com",
-    messagingSenderId: "112283156057",
-    appId: "1:112283156057:web:aa4426ab0bd86ba22e3b48",
-    measurementId: "G-4DT108HGQF"
-  };
-
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.database();
-
-  let currentToken = "";
-
-  function gerarToken() {
-    return "token-" + Math.random().toString(36).substring(2, 10);
-  }
-
-  function irParaAnuncio() {
-    currentToken = gerarToken();
-    db.ref("tokens/" + currentToken).set({ usado: false });
-    localStorage.setItem("meuToken", currentToken);
-    window.open("https://gplinks.co/SEULINKAQUI", "_blank"); // Substitua pelo seu link real
-    document.getElementById("status").innerText = "Após pular o anúncio, clique em 'Gerar Chave'.";
-  }
-
-  function gerarChave() {
-    const token = localStorage.getItem("meuToken");
-    if (!token) {
-      alert("Clique primeiro em 'Ir para Anúncio'.");
-      return;
-    }
-
-    db.ref("tokens/" + token).get().then(snapshot => {
-      if (!snapshot.exists()) {
-        alert("Token inválido. Gere um novo.");
-      } else if (snapshot.val().usado) {
-        alert("Esse token já foi usado. Clique em 'Ir para Anúncio' novamente.");
-      } else {
-        const chave = "KEY-" + Math.random().toString(36).substring(2, 10).toUpperCase();
-        db.ref("tokens/" + token).update({ usado: true });
-        mostrarDialogo(chave);
-      }
-    });
-  }
-
-  function mostrarDialogo(chave) {
-    document.getElementById("keyText").innerText = chave;
-    document.getElementById("overlay").style.display = "block";
-    document.getElementById("dialog").style.display = "block";
-  }
-
-  function copiarChave() {
-    const chave = document.getElementById("keyText").innerText;
-    navigator.clipboard.writeText(chave).then(() => {
-      alert("Chave copiada!");
-      fecharDialogo();
-    });
-  }
-
-  function fecharDialogo() {
-    document.getElementById("overlay").style.display = "none";
-    document.getElementById("dialog").style.display = "none";
-  }
-
-  document.getElementById("overlay").addEventListener("click", fecharDialogo);
-</script>
-
+  <header>
+    <img src="https://play-lh.googleusercontent.com/XI4eMygNMDzAfagZ9uL_V2T-cXJpgLwvEq_6ivq3Nqugs_sQwYXJScbWKHFSJXKpPw=w240-h480-rw" alt="Coin Master">
+    <div>
+      <h1 class="app-title">Coin Master</h1>
+      <p class="developer">Moon Active · Contém anúncios · Compras no app</p>
+      <p>Classificação: 4,7 ★ (9 mi avaliações)</p>
+      <p>Tamanho: 95 MB · Classificação Livre</p>
+    </div>
+  </header>  <div class="section">
+    <button class="install-button">Instalar</button>
+    <p>Instalar em smartphone. Mais dispositivos estão disponíveis.</p>
+  </div>  <div class="section video-preview">
+    <img src="https://play-lh.googleusercontent.com/abpSzDPm78dF2MGy1Sh3WZxRx0c3smwl0GlP5pqVZz7ZqV8TLHep0xDOKUWEayokYDY=w526-h296-rw" alt="Coin Master Video Preview">
+  </div>  <div class="section">
+    <h2>Sobre este jogo</h2>
+    <p>Bem-vindo ao Coin Master! - Junte-se à aventura!</p>
+    <div class="tags">
+      <span>Número 1 da lista mais rentáveis na categoria</span>
+      <span>Cassino</span>
+      <span>Cassino e aventura</span>
+      <span>Renovação</span>
+      <span>Viking</span>
+      <span>Um jogador</span>
+    </div>
+  </div>
 </body>
 </html>
