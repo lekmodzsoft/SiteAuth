@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
-/* Loader personalizado DS */
+/* Loader estilo Play Store */
 #loader {
     position: fixed;
     top: 0;
@@ -25,43 +25,49 @@
     align-items: center;
     z-index: 2000;
     flex-direction: column;
+    overflow: hidden;
 }
 
 #loader .circle {
     position: relative;
     width: 120px;
     height: 120px;
-}
-#loader .circle::before, #loader .circle::after {
-    content: "";
-    position: absolute;
-    border: 4px solid white;
+    border: 4px solid rgba(255,255,255,0.3);
+    border-top-color: white;
     border-radius: 50%;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
     animation: spin 1.5s linear infinite;
-    box-shadow: 0 0 20px white, 0 0 40px #ff00aa, 0 0 60px #6e00ff;
 }
-#loader .circle::after {
-    border-color: #ff00aa;
-    animation-duration: 2s;
-}
-#loader .text {
+
+#loader .screens {
     position: absolute;
+    width: 60px;
+    height: 80px;
+    background: white;
+    border-radius: 10px;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 2.5em;
-    font-weight: 700;
-    color: white;
-    letter-spacing: 5px;
+    transform: translate(-50%, -50%) scale(0.8);
+    animation: slide 1.2s infinite;
+    box-shadow: 0 0 15px #ff00aa, 0 0 30px #6e00ff;
+}
+
+/* Terceira tela atrasada */
+#loader .screens:nth-child(2) {
+    animation-delay: 0.4s;
+}
+#loader .screens:nth-child(3) {
+    animation-delay: 0.8s;
 }
 
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+@keyframes slide {
+    0% { transform: translate(-50%, -50%) translateX(-40px) scale(0.7); opacity: 0.3; }
+    50% { transform: translate(-50%, -50%) translateX(0px) scale(1); opacity: 1; }
+    100% { transform: translate(-50%, -50%) translateX(40px) scale(0.7); opacity: 0.3; }
 }
 
 body {
@@ -161,10 +167,12 @@ footer { padding: 15px; background: rgba(0,0,0,0.2); font-size: 0.9em; }
 </head>
 <body>
 
-<!-- Loader personalizado -->
+<!-- Loader estilo Play Store -->
 <div id="loader">
     <div class="circle"></div>
-    <div class="text">D S</div>
+    <div class="screens"></div>
+    <div class="screens"></div>
+    <div class="screens"></div>
 </div>
 
 <header>
@@ -225,12 +233,14 @@ function toggleMenu() {
     else { menu.style.display = "flex"; }
 }
 
-// Loader: some após carregar a página
+// Loader permanece por 7 segundos
 window.addEventListener("load", function(){
     const loader = document.getElementById("loader");
-    loader.style.transition = "opacity 0.5s ease";
-    loader.style.opacity = "0";
-    setTimeout(() => { loader.style.display = "none"; }, 500);
+    setTimeout(() => {
+        loader.style.transition = "opacity 0.5s ease";
+        loader.style.opacity = "0";
+        setTimeout(() => { loader.style.display = "none"; }, 500);
+    }, 7000); // 7 segundos
 });
 </script>
 
