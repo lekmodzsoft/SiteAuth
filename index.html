@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agência Oficial Bigo Live</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-wYfwUzKv0RmV1L+OYjzM1HzdsB/wnHfS1xnNQdCROt4XzZ37ewUnE30i8v7Pdd7l07pOe6k6Gfg4F8A0+jL0eg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -67,21 +68,18 @@
         .feature h3 {
             font-size: 1.3em;
             margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         .feature p {
             font-size: 1.05em;
-        }
-        .feature i {
-            font-size: 1.5em;
-            margin-right: 10px;
-            color: #ffcc00;
         }
         footer {
             padding: 15px;
             background: rgba(0,0,0,0.2);
             font-size: 0.9em;
         }
-        /* Responsivo */
         @media (min-width: 768px) {
             .btn-container {
                 flex-direction: row;
