@@ -27,6 +27,7 @@
     flex-direction: column;
     color: white;
     font-family: 'Poppins', sans-serif;
+    transition: opacity 0.5s ease;
 }
 
 .loader-title {
@@ -85,7 +86,7 @@ header {
     padding: 20px;
     position: relative;
 }
-header h1 { font-size: 2.3em; font-weight: 600; margin-bottom: 5px; }
+header h1 { font-size: 2.3em; font-weight: 600; margin-bottom: 5px; text-shadow: 2px 2px 5px black; }
 header p.subtitle { font-size: 1.2em; margin-bottom: 10px; }
 header p.agency-info { font-size: 1em; margin-bottom: 20px; color: #f0f0f0; max-width: 600px; margin-left: auto; margin-right: auto; }
 
@@ -105,7 +106,7 @@ header p.agency-info { font-size: 1em; margin-bottom: 20px; color: #f0f0f0; max-
 
 /* Features */
 section { padding: 20px; max-width: 800px; margin: auto; }
-.feature { background: rgba(255,255,255,0.1); border-radius: 12px; padding: 20px; margin-bottom: 20px; text-align: left; box-shadow: 0 4px 15px black; }
+.feature { background: rgba(255,255,255,0.1); border-radius: 12px; padding: 20px; margin-bottom: 20px; text-align: left; box-shadow: 0 4px 15px black; cursor: pointer; }
 .feature h3 { font-size: 1.3em; margin-bottom: 5px; display: flex; align-items: center; gap: 10px; }
 .feature p { font-size: 1.05em; }
 
@@ -173,6 +174,37 @@ section { padding: 20px; max-width: 800px; margin: auto; }
 .like-views button:hover { background: #ff0077; transform: scale(1.05); }
 .like-views div:hover { background: rgba(255,255,255,0.2); }
 
+/* Modal */
+#infoModal {
+    display: none;
+    position: fixed;
+    z-index: 5000;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.8);
+    justify-content: center;
+    align-items: center;
+}
+.modal-content {
+    background: rgba(255,255,255,0.1);
+    padding: 25px;
+    border-radius: 15px;
+    max-width: 500px;
+    color: white;
+    text-align: left;
+    box-shadow: 0 4px 15px black;
+    position: relative;
+}
+.modal-content h3 { margin-top: 0; font-size: 1.5em; }
+.modal-content p { font-size: 1.05em; }
+.close-modal {
+    position: absolute;
+    top: 10px; right: 15px;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+/* Responsivo */
 @media (min-width: 768px) { 
     .btn-container { flex-direction: row; justify-content: center; } 
     .btn, .btn-whatsapp { width: auto; } 
@@ -206,9 +238,9 @@ section { padding: 20px; max-width: 800px; margin: auto; }
 
     <i class="fas fa-bars hamburger" onclick="toggleMenu()"></i>
     <div class="menu" id="menu">
-        <a href="#crescimento"><i class="fas fa-bolt"></i> Crescimento Rápido</a>
-        <a href="#contratos"><i class="fas fa-file-contract"></i> Contratos Seguros</a>
-        <a href="#pagamentos"><i class="fas fa-hand-holding-dollar"></i> Pagamentos Garantidos</a>
+        <a href="javascript:void(0)" onclick="openModal('crescimento')"><i class="fas fa-bolt"></i> Crescimento Rápido</a>
+        <a href="javascript:void(0)" onclick="openModal('contratos')"><i class="fas fa-file-contract"></i> Contratos Seguros</a>
+        <a href="javascript:void(0)" onclick="openModal('pagamentos')"><i class="fas fa-hand-holding-dollar"></i> Pagamentos Garantidos</a>
     </div>
 
     <div style="margin: 20px auto; max-width: 500px;">
@@ -216,41 +248,43 @@ section { padding: 20px; max-width: 800px; margin: auto; }
     </div>
 
     <div class="btn-container">
-        <a href="https://wa.me/553496741592?text=Ol%C3%A1%20quero%20ser%20contratado(a)%20no%20app%20Bigo%20Live" class="btn">
-            <i class="fa-solid fa-microphone"></i> Quero Ser Host
-        </a>
-        <a href="https://wa.me/553496741592?text=Ol%C3%A1%20quero%20ser%20contratado(a)%20no%20app%20Bigo%20Live" class="btn-whatsapp">
-            <i class="fa-brands fa-whatsapp"></i> Chamar no WhatsApp
-        </a>
+        <a href="https://wa.me/553496741592?text=Ol%C3%A1%20quero%20ser%20contratado(a)%20no%20app%20bigo%20live" class="btn"><i class="fa-solid fa-microphone"></i> Quero Ser Host</a>
+        <a href="https://wa.me/553496741592?text=Ol%C3%A1%20quero%20ser%20contratado(a)%20no%20app%20bigo%20live" class="btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> Chamar no WhatsApp</a>
     </div>
 </header>
 
 <section>
-    <div class="feature" id="crescimento">
+    <div class="feature" id="crescimento" onclick="openModal('crescimento')">
         <h3><i class="fa-solid fa-bolt"></i> Crescimento Rápido</h3>
         <p>Apoio profissional para impulsionar sua audiência e ganhos no Bigo Live.</p>
     </div>
-    <div class="feature" id="contratos">
+    <div class="feature" id="contratos" onclick="openModal('contratos')">
         <h3><i class="fa-solid fa-file-contract"></i> Contratos Seguros</h3>
         <p>Assinatura de contratos com respaldo e suporte oficial da plataforma.</p>
     </div>
-    <div class="feature" id="pagamentos">
+    <div class="feature" id="pagamentos" onclick="openModal('pagamentos')">
         <h3><i class="fa-solid fa-hand-holding-dollar"></i> Pagamentos Garantidos</h3>
         <p>Receba seus pagamentos sempre em dia e com transparência total.</p>
     </div>
 </section>
 
+<!-- Seção de patrocinadores -->
 <section>
     <h2 style="margin-bottom: 20px;">Patrocinadores Oficiais</h2>
     <div class="sponsors">
+        <!-- Bigo Live -->
         <div class="sponsor-card">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQV1YDc2Px968li3sXR1KKv0l6gln9EtBywZXo8L03X_xRG9w03LEdbNU7y&s=10" alt="Bigo Live">
             <a href="https://www.bigo.tv" target="_blank">Bigo Live</a>
         </div>
+
+        <!-- Cloudflare -->
         <div class="sponsor-card">
             <i class="fas fa-cloud" style="font-size:50px; margin-bottom:10px;"></i>
             <a href="https://www.cloudflare.com" target="_blank">Cloudflare</a>
         </div>
+
+        <!-- Site Seguro -->
         <div class="sponsor-card">
             <i class="fas fa-lock" style="font-size:50px; margin-bottom:10px;"></i>
             <a href="https://www.darkstaragencia.com" target="_blank">Site Seguro</a>
@@ -258,26 +292,35 @@ section { padding: 20px; max-width: 800px; margin: auto; }
     </div>
 </section>
 
+<!-- Modal -->
+<div id="infoModal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <h3 id="modalTitle"></h3>
+        <p id="modalText"></p>
+    </div>
+</div>
+
 <footer>
     &copy; 2025 Dark Star Agência - Todos os direitos reservados.
 </footer>
 
-<!-- Botão flutuante atualizado -->
-<a href="https://wa.me/553496741592?text=Ol%C3%A1%20quero%20ser%20contratado(a)%20no%20app%20Bigo%20Live" target="_blank" id="whatsapp-float">
+<a href="https://wa.me/553496741592?text=Ol%C3%A1%20quero%20ser%20contratado(a)%20no%20app%20bigo%20live" target="_blank" id="whatsapp-float">
     <i class="fab fa-whatsapp"></i>
 </a>
 
 <script>
 function toggleMenu() {
     const menu = document.getElementById('menu');
-    menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+    menu.style.display = (menu.style.display === "flex") ? "none" : "flex";
 }
 
 // Loader visível por 7 segundos
-window.addEventListener("load", function() {
+window.addEventListener("load", function(){
     const loader = document.getElementById("loader");
     setTimeout(() => {
-        loader.style.display = "none";
+        loader.style.opacity = "0";
+        setTimeout(() => { loader.style.display = "none"; }, 500);
     }, 7000);
 });
 
@@ -287,14 +330,46 @@ document.getElementById('likeCount').innerText = likeCount;
 document.getElementById('likeBtn').addEventListener('click', () => {
     likeCount++;
     localStorage.setItem('likeCount', likeCount);
-    document.getElementById('likeCount').innerText = likeCount;
+    document.getElementById('likeCount').innerText = likeCount >= 1000 ? (likeCount/1000).toFixed(1)+'k' : likeCount;
 });
 
 // View counter logic
 let viewCount = localStorage.getItem('viewCount') || 0;
 viewCount++;
 localStorage.setItem('viewCount', viewCount);
-document.getElementById('viewCount').innerText = viewCount;
+document.getElementById('viewCount').innerText = viewCount >= 1000 ? (viewCount/1000).toFixed(1)+'k' : viewCount;
+
+// Modal functionality
+function openModal(feature) {
+    const modal = document.getElementById('infoModal');
+    const title = document.getElementById('modalTitle');
+    const text = document.getElementById('modalText');
+    
+    if(feature === 'crescimento') {
+        title.innerText = 'Crescimento Rápido';
+        text.innerText = 'Acompanhamos seu perfil no Bigo Live e oferecemos estratégias personalizadas para aumentar sua audiência rapidamente, garantindo que você alcance novos seguidores e visualizações de forma segura e consistente.';
+    } else if(feature === 'contratos') {
+        title.innerText = 'Contratos Seguros';
+        text.innerText = 'Oferecemos contratos profissionais e claros, intermediados com a Bigo Live, garantindo que você tenha respaldo legal e suporte contínuo, evitando qualquer tipo de risco em sua carreira de host.';
+    } else if(feature === 'pagamentos') {
+        title.innerText = 'Pagamentos Garantidos';
+        text.innerText = 'Com nosso sistema de pagamentos, você recebe seus ganhos de forma segura, rápida e transparente, sem atrasos ou problemas, permitindo que você foque totalmente em crescer e entreter sua audiência.';
+    }
+
+    modal.style.display = 'flex';
+}
+
+function closeModal() {
+    document.getElementById('infoModal').style.display = 'none';
+}
+
+// Fechar modal ao clicar fora
+window.onclick = function(event) {
+    const modal = document.getElementById('infoModal');
+    if (event.target === modal) {
+        closeModal();
+    }
+}
 </script>
 
 </body>
