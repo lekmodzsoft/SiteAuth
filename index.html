@@ -103,7 +103,7 @@ header p.agency-info {
     transform: scale(1.05);
 }
 
-/* Botão WhatsApp ajustado */
+/* Botão WhatsApp */
 .btn-whatsapp {
     background: #25D366;
     color: white;
@@ -142,6 +142,30 @@ footer {
     font-size: 0.9em;
 }
 
+/* Botão flutuante WhatsApp */
+#whatsapp-float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 20px;
+    right: 20px;
+    background-color: #25D366;
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 30px;
+    z-index: 1000;
+    box-shadow: 0 4px 12px black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+}
+#whatsapp-float:hover {
+    background-color: #1ebe57;
+    transform: scale(1.1);
+}
+
 @media (min-width: 768px) {
     .btn-container {
         flex-direction: row;
@@ -158,7 +182,7 @@ footer {
 <header>
     <h1>Dark Star</h1>
     <p class="subtitle">Transforme seu talento em ganhos reais!</p>
-    <p class="agency-info">Somos uma agência oficial que realiza contratos intermediados oficialmente com a Bigo Live, garantindo segurança e suporte para que você maximize seus ganhos com tranquilidade.</p>
+    <p class="agency-info">Somos uma agência oficial que realiza contratos intermediados com a Bigo Live, garantindo segurança, suporte e maximização dos seus ganhos de forma profissional.</p>
 
     <!-- Hamburger -->
     <i class="fas fa-bars hamburger" onclick="toggleMenu()"></i>
@@ -200,6 +224,11 @@ footer {
 <footer>
     &copy; 2025 Dark Star - Todos os direitos reservados.
 </footer>
+
+<!-- Botão Flutuante WhatsApp -->
+<a href="https://wa.me/5511999999999" target="_blank" id="whatsapp-float">
+    <i class="fab fa-whatsapp"></i>
+</a>
 
 <script>
 function toggleMenu() {
