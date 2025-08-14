@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
-/* Loader estilo Play Store com texto girando */
+/* Loader estilo Circle com letras DARK STAR */
 #loader {
     position: fixed;
     top: 0;
@@ -34,6 +34,51 @@
     height: 150px;
 }
 
+/* Letras em círculo */
+.text-circle {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+    transform: rotate(0deg);
+    animation: spin 2s linear infinite;
+}
+
+.text-circle span {
+    position: absolute;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    top: 50%;
+    left: 50%;
+    transform-origin: 0 -60px; /* distância do centro */
+    opacity: 0;
+    animation: fade 1.5s linear infinite;
+}
+
+.text-circle span:nth-child(1){ transform: rotate(0deg) translateY(-60px); animation-delay: 0s; }
+.text-circle span:nth-child(2){ transform: rotate(40deg) translateY(-60px); animation-delay: 0.1s; }
+.text-circle span:nth-child(3){ transform: rotate(80deg) translateY(-60px); animation-delay: 0.2s; }
+.text-circle span:nth-child(4){ transform: rotate(120deg) translateY(-60px); animation-delay: 0.3s; }
+.text-circle span:nth-child(5){ transform: rotate(160deg) translateY(-60px); animation-delay: 0.4s; }
+.text-circle span:nth-child(6){ transform: rotate(200deg) translateY(-60px); animation-delay: 0.5s; }
+.text-circle span:nth-child(7){ transform: rotate(240deg) translateY(-60px); animation-delay: 0.6s; }
+.text-circle span:nth-child(8){ transform: rotate(280deg) translateY(-60px); animation-delay: 0.7s; }
+.text-circle span:nth-child(9){ transform: rotate(320deg) translateY(-60px); animation-delay: 0.8s; }
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes fade {
+    0%, 20%, 100% { opacity: 0; }
+    10% { opacity: 1; }
+}
+
+/* Telas no centro */
 .screens {
     position: absolute;
     width: 60px;
@@ -47,9 +92,9 @@
     box-shadow: 0 0 15px #ff00aa, 0 0 30px #6e00ff;
 }
 
-.screens:nth-child(1) { animation-delay: 0s; }
-.screens:nth-child(2) { animation-delay: 0.4s; }
-.screens:nth-child(3) { animation-delay: 0.8s; }
+.screens:nth-child(1){ animation-delay: 0s; }
+.screens:nth-child(2){ animation-delay: 0.4s; }
+.screens:nth-child(3){ animation-delay: 0.8s; }
 
 @keyframes slide {
     0% { transform: translate(-50%, -50%) translateX(-40px) scale(0.7); opacity: 0.3; }
@@ -57,46 +102,7 @@
     100% { transform: translate(-50%, -50%) translateX(40px) scale(0.7); opacity: 0.3; }
 }
 
-/* Texto girando */
-.text-rotate {
-    position: absolute;
-    width: 150px;
-    height: 150px;
-    top: 0;
-    left: 0;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    animation: rotate 2s linear infinite;
-}
-
-.text-rotate span {
-    position: absolute;
-    font-size: 14px;
-    font-weight: bold;
-    color: white;
-}
-
-/* Colocar as letras ao redor do círculo */
-.text-rotate span:nth-child(1){ transform: rotate(0deg) translate(75px) rotate(0deg); }
-.text-rotate span:nth-child(2){ transform: rotate(30deg) translate(75px) rotate(-30deg); }
-.text-rotate span:nth-child(3){ transform: rotate(60deg) translate(75px) rotate(-60deg); }
-.text-rotate span:nth-child(4){ transform: rotate(90deg) translate(75px) rotate(-90deg); }
-.text-rotate span:nth-child(5){ transform: rotate(120deg) translate(75px) rotate(-120deg); }
-.text-rotate span:nth-child(6){ transform: rotate(150deg) translate(75px) rotate(-150deg); }
-.text-rotate span:nth-child(7){ transform: rotate(180deg) translate(75px) rotate(-180deg); }
-.text-rotate span:nth-child(8){ transform: rotate(210deg) translate(75px) rotate(-210deg); }
-.text-rotate span:nth-child(9){ transform: rotate(240deg) translate(75px) rotate(-240deg); }
-.text-rotate span:nth-child(10){ transform: rotate(270deg) translate(75px) rotate(-270deg); }
-.text-rotate span:nth-child(11){ transform: rotate(300deg) translate(75px) rotate(-300deg); }
-.text-rotate span:nth-child(12){ transform: rotate(330deg) translate(75px) rotate(-330deg); }
-
-@keyframes rotate {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
+/* Resto do site */
 body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
@@ -105,7 +111,6 @@ body {
     text-align: center;
 }
 
-/* Header */
 header {
     padding: 20px;
     position: relative;
@@ -114,37 +119,14 @@ header h1 { font-size: 2.3em; font-weight: 600; margin-bottom: 5px; }
 header p.subtitle { font-size: 1.2em; margin-bottom: 10px; }
 header p.agency-info { font-size: 1em; margin-bottom: 20px; color: #f0f0f0; max-width: 600px; margin-left: auto; margin-right: auto; }
 
-/* Hamburger Menu */
 .hamburger { position: absolute; top: 25px; right: 25px; font-size: 1.8em; cursor: pointer; }
-.menu {
-    display: none;
-    flex-direction: column;
-    background: rgba(0,0,0,0.8);
-    position: absolute;
-    right: 20px;
-    top: 60px;
-    padding: 15px;
-    border-radius: 10px;
-    text-align: left;
-    z-index: 1000;
-}
+.menu { display: none; flex-direction: column; background: rgba(0,0,0,0.8); position: absolute; right: 20px; top: 60px; padding: 15px; border-radius: 10px; text-align: left; z-index: 1000; }
 .menu a { color: white; text-decoration: none; margin-bottom: 10px; display: block; }
 .menu a:hover { color: #ffdd00; }
 
-/* Botões */
 .btn-container { margin-top: 20px; display: flex; flex-direction: column; gap: 15px; align-items: center; }
 .btn, .btn-whatsapp {
-    padding: 18px 25px;
-    font-size: 1.4em;
-    font-weight: bold;
-    border-radius: 12px;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    transition: 0.3s;
-    justify-content: center;
-    box-shadow: 0 4px 10px black;
+    padding: 18px 25px; font-size: 1.4em; font-weight: bold; border-radius: 12px; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; transition: 0.3s; justify-content: center; box-shadow: 0 4px 10px black;
 }
 .btn { background: #ff0077; color: white; }
 .btn:hover { background: #ff3399; transform: scale(1.05); }
@@ -152,56 +134,28 @@ header p.agency-info { font-size: 1em; margin-bottom: 20px; color: #f0f0f0; max-
 .btn-whatsapp:hover { background: #1ebe57; transform: scale(1.05); }
 
 section { padding: 20px; max-width: 800px; margin: auto; }
-.feature {
-    background: rgba(255,255,255,0.1);
-    border-radius: 12px;
-    padding: 20px;
-    margin-bottom: 20px;
-    text-align: left;
-    box-shadow: 0 4px 15px black;
-}
+.feature { background: rgba(255,255,255,0.1); border-radius: 12px; padding: 20px; margin-bottom: 20px; text-align: left; box-shadow: 0 4px 15px black; }
 .feature h3 { font-size: 1.3em; margin-bottom: 5px; display: flex; align-items: center; gap: 10px; }
 .feature p { font-size: 1.05em; }
 
 footer { padding: 15px; background: rgba(0,0,0,0.2); font-size: 0.9em; }
 
-/* Botão flutuante WhatsApp */
-#whatsapp-float {
-    position: fixed;
-    width: 60px;
-    height: 60px;
-    bottom: 20px;
-    right: 20px;
-    background-color: #25D366;
-    color: white;
-    border-radius: 50%;
-    text-align: center;
-    font-size: 30px;
-    z-index: 1000;
-    box-shadow: 0 4px 12px black;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: 0.3s;
-}
+#whatsapp-float { position: fixed; width: 60px; height: 60px; bottom: 20px; right: 20px; background-color: #25D366; color: white; border-radius: 50%; text-align: center; font-size: 30px; z-index: 1000; box-shadow: 0 4px 12px black; display: flex; align-items: center; justify-content: center; transition: 0.3s; }
 #whatsapp-float:hover { background-color: #1ebe57; transform: scale(1.1); }
 
-@media (min-width: 768px) {
-    .btn-container { flex-direction: row; justify-content: center; }
-    .btn, .btn-whatsapp { width: auto; }
-}
+@media (min-width: 768px) { .btn-container { flex-direction: row; justify-content: center; } .btn, .btn-whatsapp { width: auto; } }
 </style>
 </head>
 <body>
 
-<!-- Loader com texto girando -->
+<!-- Loader com letras DARK STAR girando -->
 <div id="loader">
     <div class="loader-container">
         <div class="screens"></div>
         <div class="screens"></div>
         <div class="screens"></div>
-        <div class="text-rotate">
-            <span>D</span><span>a</span><span>r</span><span>k</span><span> </span><span>S</span><span>t</span><span>a</span><span>r</span><span> </span><span>D</span><span>S</span>
+        <div class="text-circle">
+            <span>D</span><span>A</span><span>R</span><span>K</span><span>S</span><span>T</span><span>A</span><span>R</span>
         </div>
     </div>
 </div>
@@ -211,7 +165,6 @@ footer { padding: 15px; background: rgba(0,0,0,0.2); font-size: 0.9em; }
     <p class="subtitle">Transforme seu talento em ganhos reais!</p>
     <p class="agency-info">Somos uma agência oficial que realiza contratos intermediados com a Bigo Live, garantindo segurança, suporte e maximização dos seus ganhos de forma profissional.</p>
 
-    <!-- Hamburger -->
     <i class="fas fa-bars hamburger" onclick="toggleMenu()"></i>
     <div class="menu" id="menu">
         <a href="#crescimento"><i class="fas fa-bolt"></i> Crescimento Rápido</a>
@@ -219,12 +172,8 @@ footer { padding: 15px; background: rgba(0,0,0,0.2); font-size: 0.9em; }
         <a href="#pagamentos"><i class="fas fa-hand-holding-dollar"></i> Pagamentos Garantidos</a>
     </div>
 
-    <!-- Vídeo de Apresentação -->
     <div style="margin: 20px auto; max-width: 500px;">
-        <iframe width="100%" height="280" src="https://www.youtube.com/embed/ScMzIvxBSi4" 
-        title="Apresentação Dark Star" frameborder="0" 
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-        allowfullscreen></iframe>
+        <iframe width="100%" height="280" src="https://www.youtube.com/embed/ScMzIvxBSi4" frameborder="0" allowfullscreen></iframe>
     </div>
 
     <div class="btn-container">
@@ -252,7 +201,6 @@ footer { padding: 15px; background: rgba(0,0,0,0.2); font-size: 0.9em; }
     &copy; 2025 Dark Star - Todos os direitos reservados.
 </footer>
 
-<!-- Botão Flutuante WhatsApp -->
 <a href="https://wa.me/5511999999999" target="_blank" id="whatsapp-float">
     <i class="fab fa-whatsapp"></i>
 </a>
@@ -271,7 +219,7 @@ window.addEventListener("load", function(){
         loader.style.transition = "opacity 0.5s ease";
         loader.style.opacity = "0";
         setTimeout(() => { loader.style.display = "none"; }, 500);
-    }, 7000); // 7 segundos
+    }, 7000);
 });
 </script>
 
