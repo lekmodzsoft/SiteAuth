@@ -84,9 +84,32 @@ header p {
     transition: 0.3s;
     width: 80%;
     justify-content: center;
+    box-shadow: 0 4px 10px black; /* sombra preta */
 }
 .btn:hover {
     background: #ff3399;
+    transform: scale(1.05);
+}
+
+/* Botão WhatsApp */
+.btn-whatsapp {
+    background: #25D366; /* Verde WhatsApp */
+    color: white;
+    padding: 20px 30px; /* igual ao outro botão */
+    font-size: 1.4em;
+    font-weight: bold;
+    border-radius: 12px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: 0.3s;
+    width: 80%;
+    justify-content: center;
+    box-shadow: 0 4px 10px black; /* sombra preta */
+}
+.btn-whatsapp:hover {
+    background: #1ebe57;
     transform: scale(1.05);
 }
 
@@ -101,7 +124,7 @@ section {
     padding: 20px;
     margin-bottom: 20px;
     text-align: left;
-    box-shadow: 0 4px 15px 0 black; /* Sombras pretas */
+    box-shadow: 0 4px 15px black; /* Sombras pretas */
 }
 .feature h3 {
     font-size: 1.3em;
@@ -124,7 +147,7 @@ footer {
         flex-direction: row;
         justify-content: center;
     }
-    .btn {
+    .btn, .btn-whatsapp {
         width: auto;
     }
 }
@@ -154,7 +177,7 @@ footer {
 
     <div class="btn-container">
         <a href="#" class="btn"><i class="fa-solid fa-microphone"></i> Quero Ser Host</a>
-        <a href="https://wa.me/5511999999999" class="btn"><i class="fa-brands fa-whatsapp"></i> Chamar no WhatsApp</a>
+        <a href="https://wa.me/5511999999999" class="btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> Chamar no WhatsApp</a>
     </div>
 </header>
 
