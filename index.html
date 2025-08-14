@@ -276,6 +276,14 @@ function toggleMenu() {
     else { menu.style.display = "flex"; }
 }
 
+// Formatação de números: mil / mi
+function formatNumber(num) {
+    num = Number(num) || 0;
+    if (num >= 1000000) return (num / 1000000).toFixed(1).replace('.0','') + ' mi';
+    if (num >= 1000) return Math.floor(num / 1000) + ' mil';
+    return String(num);
+}
+
 // Loader visível por 7 segundos
 window.addEventListener("load", function(){
     const loader = document.getElementById("loader");
@@ -287,19 +295,22 @@ window.addEventListener("load", function(){
 });
 
 // Like button logic
-let likeCount = localStorage.getItem('likeCount') || 0;
-document.getElementById('likeCount').innerText = likeCount;
+let likeCount = parseInt(localStorage.getItem('likeCount'), 10);
+if (isNaN(likeCount)) likeCount = 0;
+document.getElementById('likeCount').innerText = formatNumber(likeCount);
+
 document.getElementById('likeBtn').addEventListener('click', () => {
-    likeCount++;
+    likeCount += 1;
     localStorage.setItem('likeCount', likeCount);
-    document.getElementById('likeCount').innerText = likeCount;
+    document.getElementById('likeCount').innerText = formatNumber(likeCount);
 });
 
 // View counter logic
-let viewCount = localStorage.getItem('viewCount') || 0;
-viewCount++;
+let viewCount = parseInt(localStorage.getItem('viewCount'), 10);
+if (isNaN(viewCount)) viewCount = 0;
+viewCount += 1;
 localStorage.setItem('viewCount', viewCount);
-document.getElementById('viewCount').innerText = viewCount;
+document.getElementById('viewCount').innerText = formatNumber(viewCount);
 </script>
 
 </body>
