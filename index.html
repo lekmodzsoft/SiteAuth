@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
-/* Loader estilo Circle com letras DARK STAR */
+/* Loader estilo Play Store com telas animadas */
 #loader {
     position: fixed;
     top: 0;
@@ -26,56 +26,28 @@
     z-index: 2000;
     overflow: hidden;
     flex-direction: column;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+}
+
+.loader-title {
+    font-size: 2em;
+    font-weight: 700;
+    text-shadow: 2px 2px 5px black;
+    margin-bottom: 20px;
+}
+
+.loader-subtitle {
+    font-size: 1.2em;
+    font-weight: 600;
+    text-shadow: 2px 2px 5px black;
+    margin-top: 20px;
 }
 
 .loader-container {
     position: relative;
     width: 150px;
     height: 150px;
-}
-
-/* Letras em círculo */
-.text-circle {
-    position: absolute;
-    width: 150px;
-    height: 150px;
-    top: 0;
-    left: 0;
-    border-radius: 50%;
-    transform: rotate(0deg);
-    animation: spin 2s linear infinite;
-}
-
-.text-circle span {
-    position: absolute;
-    font-size: 16px;
-    font-weight: bold;
-    color: white;
-    top: 50%;
-    left: 50%;
-    transform-origin: 0 -60px; /* distância do centro */
-    opacity: 0;
-    animation: fade 1.5s linear infinite;
-}
-
-.text-circle span:nth-child(1){ transform: rotate(0deg) translateY(-60px); animation-delay: 0s; }
-.text-circle span:nth-child(2){ transform: rotate(40deg) translateY(-60px); animation-delay: 0.1s; }
-.text-circle span:nth-child(3){ transform: rotate(80deg) translateY(-60px); animation-delay: 0.2s; }
-.text-circle span:nth-child(4){ transform: rotate(120deg) translateY(-60px); animation-delay: 0.3s; }
-.text-circle span:nth-child(5){ transform: rotate(160deg) translateY(-60px); animation-delay: 0.4s; }
-.text-circle span:nth-child(6){ transform: rotate(200deg) translateY(-60px); animation-delay: 0.5s; }
-.text-circle span:nth-child(7){ transform: rotate(240deg) translateY(-60px); animation-delay: 0.6s; }
-.text-circle span:nth-child(8){ transform: rotate(280deg) translateY(-60px); animation-delay: 0.7s; }
-.text-circle span:nth-child(9){ transform: rotate(320deg) translateY(-60px); animation-delay: 0.8s; }
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-@keyframes fade {
-    0%, 20%, 100% { opacity: 0; }
-    10% { opacity: 1; }
 }
 
 /* Telas no centro */
@@ -148,16 +120,15 @@ footer { padding: 15px; background: rgba(0,0,0,0.2); font-size: 0.9em; }
 </head>
 <body>
 
-<!-- Loader com letras DARK STAR girando -->
+<!-- Loader -->
 <div id="loader">
+    <div class="loader-title">DARK STAR AGENCY</div>
     <div class="loader-container">
         <div class="screens"></div>
         <div class="screens"></div>
         <div class="screens"></div>
-        <div class="text-circle">
-            <span>D</span><span>A</span><span>R</span><span>K</span><span>S</span><span>T</span><span>A</span><span>R</span>
-        </div>
     </div>
+    <div class="loader-subtitle">CARREGANDO AGUARDE...</div>
 </div>
 
 <header>
