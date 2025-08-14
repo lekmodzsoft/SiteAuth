@@ -25,7 +25,7 @@
         flex-wrap: wrap;
     }
     header h1 {
-        font-size: 2em; /* Aumentado mais */
+        font-size: 2em; /* Aumentado */
         font-weight: bold;
         margin: 0;
     }
@@ -57,14 +57,14 @@
     }
     .btn {
         display: inline-block;
-        padding: 18px 30px; /* Aumentado mais */
+        padding: 18px 30px; /* Botões grandes */
         background: linear-gradient(90deg, #ff0077, #ff5f00);
         color: white;
         text-decoration: none;
         border-radius: 10px;
         font-weight: bold;
         transition: 0.3s;
-        font-size: 1.1em; /* Aumentado mais */
+        font-size: 1.1em;
         margin: 5px;
     }
     .btn:hover {
@@ -82,14 +82,14 @@
         text-align: center;
     }
     .beneficios-cards {
-        display: grid;
-        grid-template-columns: 1fr;
+        display: flex;
+        flex-direction: column; /* Sempre em coluna no celular */
         gap: 25px;
         margin-top: 35px;
     }
     @media(min-width: 768px) {
         .beneficios-cards {
-            grid-template-columns: repeat(3, 1fr);
+            flex-direction: row; /* Lado a lado no PC/tablet */
         }
         nav {
             flex-basis: auto;
@@ -97,6 +97,7 @@
         }
     }
     .card {
+        flex: 1;
         background: #1a1a1a;
         padding: 25px;
         border-radius: 12px;
@@ -108,7 +109,7 @@
         background: #222;
     }
     .card i {
-        font-size: 3em; /* Ícones maiores */
+        font-size: 3em;
         margin-bottom: 15px;
         display: block;
     }
