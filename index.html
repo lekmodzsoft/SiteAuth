@@ -28,9 +28,17 @@ header h1 {
     font-weight: 600;
     margin-bottom: 5px;
 }
-header p {
+header p.subtitle {
     font-size: 1.2em;
+    margin-bottom: 10px;
+}
+header p.agency-info {
+    font-size: 1em;
     margin-bottom: 20px;
+    color: #f0f0f0;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* Hamburger Menu */
@@ -63,6 +71,7 @@ header p {
     color: #ffdd00;
 }
 
+/* Botões */
 .btn-container {
     margin-top: 20px;
     display: flex;
@@ -70,10 +79,8 @@ header p {
     gap: 15px;
     align-items: center;
 }
-.btn {
-    background: #ff0077;
-    color: white;
-    padding: 20px 30px;
+.btn, .btn-whatsapp {
+    padding: 18px 25px;
     font-size: 1.4em;
     font-weight: bold;
     border-radius: 12px;
@@ -82,31 +89,24 @@ header p {
     align-items: center;
     gap: 10px;
     transition: 0.3s;
-    width: 80%;
     justify-content: center;
-    box-shadow: 0 4px 10px black; /* sombra preta */
+    box-shadow: 0 4px 10px black;
+}
+
+/* Botão Quero Ser Host */
+.btn {
+    background: #ff0077;
+    color: white;
 }
 .btn:hover {
     background: #ff3399;
     transform: scale(1.05);
 }
 
-/* Botão WhatsApp */
+/* Botão WhatsApp ajustado */
 .btn-whatsapp {
-    background: #25D366; /* Verde WhatsApp */
+    background: #25D366;
     color: white;
-    padding: 20px 30px; /* igual ao outro botão */
-    font-size: 1.4em;
-    font-weight: bold;
-    border-radius: 12px;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    transition: 0.3s;
-    width: 80%;
-    justify-content: center;
-    box-shadow: 0 4px 10px black; /* sombra preta */
 }
 .btn-whatsapp:hover {
     background: #1ebe57;
@@ -124,7 +124,7 @@ section {
     padding: 20px;
     margin-bottom: 20px;
     text-align: left;
-    box-shadow: 0 4px 15px black; /* Sombras pretas */
+    box-shadow: 0 4px 15px black;
 }
 .feature h3 {
     font-size: 1.3em;
@@ -157,7 +157,8 @@ footer {
 
 <header>
     <h1>Dark Star</h1>
-    <p>Transforme seu talento em ganhos reais!</p>
+    <p class="subtitle">Transforme seu talento em ganhos reais!</p>
+    <p class="agency-info">Somos uma agência oficial que realiza contratos intermediados oficialmente com a Bigo Live, garantindo segurança e suporte para que você maximize seus ganhos com tranquilidade.</p>
 
     <!-- Hamburger -->
     <i class="fas fa-bars hamburger" onclick="toggleMenu()"></i>
@@ -201,7 +202,6 @@ footer {
 </footer>
 
 <script>
-// Toggle menu
 function toggleMenu() {
     const menu = document.getElementById('menu');
     if(menu.style.display === "flex") {
