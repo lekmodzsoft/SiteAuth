@@ -263,6 +263,7 @@ section { padding: 20px; max-width: 800px; margin: auto; }
     &copy; 2025 Dark Star Agência - Todos os direitos reservados.
 </footer>
 
+<!-- Botão flutuante atualizado -->
 <a href="https://wa.me/553496741592?text=Ol%C3%A1%20quero%20ser%20contratado(a)%20no%20app%20Bigo%20Live" target="_blank" id="whatsapp-float">
     <i class="fab fa-whatsapp"></i>
 </a>
@@ -288,30 +289,4 @@ let likeCount = localStorage.getItem('likeCount') || 0;
 document.getElementById('likeCount').innerText = likeCount;
 document.getElementById('likeBtn').addEventListener('click', () => {
     likeCount++;
-    localStorage.setItem('likeCount', likeCount);
-    document.getElementById('likeCount').innerText = likeCount;
-});
-
-// View counter logic
-let viewCount = localStorage.getItem('viewCount') || 0;
-viewCount++;
-localStorage.setItem('viewCount', viewCount);
-document.getElementById('viewCount').innerText = viewCount;
-
-// Formata números grandes
-function formatNumber(num) {
-    if (num >= 1000000) return (num/1000000).toFixed(1) + "M";
-    if (num >= 1000) return (num/1000).toFixed(1) + "K";
-    return num;
-}
-
-// Atualiza contadores formatados
-function updateCounters() {
-    document.getElementById('likeCount').innerText = formatNumber(likeCount);
-    document.getElementById('viewCount').innerText = formatNumber(viewCount);
-}
-updateCounters();
-</script>
-
-</body>
-</html>
+    localStorage.setItem('likeCount
