@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agência Bigo Live</title>
+    <!-- Font Awesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -19,7 +21,7 @@
         }
 
         header h1 {
-            font-size: 2.2em; /* Texto do topo maior */
+            font-size: 2.2em;
             margin-bottom: 10px;
         }
 
@@ -38,11 +40,14 @@
         .btn {
             background: #ffdd00;
             color: black;
-            padding: 20px 35px; /* Botões bem grandes */
-            font-size: 1.4em; /* Texto do botão maior */
+            padding: 20px 35px;
+            font-size: 1.4em;
             border-radius: 15px;
             font-weight: bold;
             text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
             transition: 0.3s;
         }
 
@@ -61,6 +66,12 @@
             padding: 20px;
             border-radius: 15px;
             margin-bottom: 20px;
+        }
+
+        .info-box i {
+            font-size: 2em;
+            margin-bottom: 10px;
+            color: #ffdd00;
         }
 
         .info-box h3 {
@@ -87,21 +98,24 @@
         <h1>Agência Oficial Bigo Live</h1>
         <p>Transforme seu talento em ganhos reais!</p>
         <div class="btn-container">
-            <a href="#" class="btn">Quero Ser Host</a>
-            <a href="https://wa.me/5511999999999" class="btn">Chamar no WhatsApp</a>
+            <a href="#" class="btn"><i class="fas fa-microphone"></i> Quero Ser Host</a>
+            <a href="https://wa.me/5511999999999" class="btn"><i class="fab fa-whatsapp"></i> Chamar no WhatsApp</a>
         </div>
     </header>
 
     <section>
         <div class="info-box">
+            <i class="fas fa-chart-line"></i>
             <h3>Crescimento Rápido</h3>
             <p>Apoio profissional para impulsionar sua audiência e ganhos no Bigo Live.</p>
         </div>
         <div class="info-box">
+            <i class="fas fa-file-signature"></i>
             <h3>Contratos Seguros</h3>
             <p>Assinatura de contratos com respaldo e suporte oficial da plataforma.</p>
         </div>
         <div class="info-box">
+            <i class="fas fa-hand-holding-usd"></i>
             <h3>Pagamentos Garantidos</h3>
             <p>Receba seus pagamentos sempre em dia e com transparência total.</p>
         </div>
