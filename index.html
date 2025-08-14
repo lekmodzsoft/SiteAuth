@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dark Star</title>
+<title>Dark Star Agência</title>
 
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
@@ -110,19 +110,56 @@ section { padding: 20px; max-width: 800px; margin: auto; }
 .feature h3 { font-size: 1.3em; margin-bottom: 5px; display: flex; align-items: center; gap: 10px; }
 .feature p { font-size: 1.05em; }
 
+/* Patrocinadores */
+.sponsors {
+    margin: 40px auto;
+    max-width: 800px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+.sponsor-card {
+    background: rgba(255,255,255,0.1);
+    padding: 15px 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: 0.3s;
+    width: 180px;
+}
+.sponsor-card img {
+    max-width: 100px;
+    margin-bottom: 10px;
+}
+.sponsor-card a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+.sponsor-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px black;
+}
+
 footer { padding: 15px; background: rgba(0,0,0,0.2); font-size: 0.9em; }
 
 #whatsapp-float { position: fixed; width: 60px; height: 60px; bottom: 20px; right: 20px; background-color: #25D366; color: white; border-radius: 50%; text-align: center; font-size: 30px; z-index: 1000; box-shadow: 0 4px 12px black; display: flex; align-items: center; justify-content: center; transition: 0.3s; }
 #whatsapp-float:hover { background-color: #1ebe57; transform: scale(1.1); }
 
-@media (min-width: 768px) { .btn-container { flex-direction: row; justify-content: center; } .btn, .btn-whatsapp { width: auto; } }
+@media (min-width: 768px) { 
+    .btn-container { flex-direction: row; justify-content: center; } 
+    .btn, .btn-whatsapp { width: auto; } 
+}
 </style>
 </head>
 <body>
 
 <!-- Loader -->
 <div id="loader">
-    <div class="loader-title">DARK STAR AGENCY</div>
+    <div class="loader-title">DARK STAR AGÊNCIA</div>
     <div class="loader-container">
         <div class="screens"></div>
         <div class="screens"></div>
@@ -132,7 +169,7 @@ footer { padding: 15px; background: rgba(0,0,0,0.2); font-size: 0.9em; }
 </div>
 
 <header>
-    <h1>Dark Star</h1>
+    <h1>Dark Star Agência</h1>
     <p class="subtitle">Transforme seu talento em ganhos reais!</p>
     <p class="agency-info">Somos uma agência oficial que realiza contratos intermediados com a Bigo Live, garantindo segurança, suporte e maximização dos seus ganhos de forma profissional.</p>
 
@@ -168,8 +205,23 @@ footer { padding: 15px; background: rgba(0,0,0,0.2); font-size: 0.9em; }
     </div>
 </section>
 
+<!-- Seção de patrocinadores -->
+<section>
+    <h2 style="margin-bottom: 20px;">Patrocinadores Oficiais</h2>
+    <div class="sponsors">
+        <div class="sponsor-card">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/1/17/BIGO_logo.png" alt="Bigo Live">
+            <a href="https://www.bigo.tv" target="_blank">Bigo Live</a>
+        </div>
+        <div class="sponsor-card">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Cloudflare_logo.svg" alt="Cloudflare">
+            <a href="https://www.cloudflare.com" target="_blank">Cloudflare</a>
+        </div>
+    </div>
+</section>
+
 <footer>
-    &copy; 2025 Dark Star - Todos os direitos reservados.
+    &copy; 2025 Dark Star Agência - Todos os direitos reservados.
 </footer>
 
 <a href="https://wa.me/5511999999999" target="_blank" id="whatsapp-float">
