@@ -113,7 +113,7 @@ section { padding: 20px; max-width: 800px; margin: auto; }
 /* Patrocinadores */
 .sponsors {
     margin: 40px auto;
-    max-width: 800px;
+    max-width: 900px;
     display: flex;
     justify-content: center;
     gap: 30px;
@@ -132,6 +132,9 @@ section { padding: 20px; max-width: 800px; margin: auto; }
 }
 .sponsor-card img {
     max-width: 100px;
+    margin-bottom: 10px;
+}
+.sponsor-card i {
     margin-bottom: 10px;
 }
 .sponsor-card a {
@@ -209,13 +212,22 @@ footer { padding: 15px; background: rgba(0,0,0,0.2); font-size: 0.9em; }
 <section>
     <h2 style="margin-bottom: 20px;">Patrocinadores Oficiais</h2>
     <div class="sponsors">
+        <!-- Bigo Live -->
         <div class="sponsor-card">
             <img src="https://upload.wikimedia.org/wikipedia/commons/1/17/BIGO_logo.png" alt="Bigo Live">
             <a href="https://www.bigo.tv" target="_blank">Bigo Live</a>
         </div>
+
+        <!-- Cloudflare -->
         <div class="sponsor-card">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Cloudflare_logo.svg" alt="Cloudflare">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Cloudflare_logo.svg" alt="Cloudflare" style="width:80px;">
             <a href="https://www.cloudflare.com" target="_blank">Cloudflare</a>
+        </div>
+
+        <!-- Site Seguro -->
+        <div class="sponsor-card">
+            <i class="fas fa-lock" style="font-size:50px; margin-bottom:10px;"></i>
+            <a href="https://www.darkstaragencia.com" target="_blank">Site Seguro</a>
         </div>
     </div>
 </section>
