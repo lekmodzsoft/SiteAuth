@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
-/* Loader estilo Play Store */
+/* Loader estilo Play Store com texto girando */
 #loader {
     position: fixed;
     top: 0;
@@ -24,21 +24,17 @@
     justify-content: center;
     align-items: center;
     z-index: 2000;
-    flex-direction: column;
     overflow: hidden;
+    flex-direction: column;
 }
 
-#loader .circle {
+.loader-container {
     position: relative;
-    width: 120px;
-    height: 120px;
-    border: 4px solid rgba(255,255,255,0.3);
-    border-top-color: white;
-    border-radius: 50%;
-    animation: spin 1.5s linear infinite;
+    width: 150px;
+    height: 150px;
 }
 
-#loader .screens {
+.screens {
     position: absolute;
     width: 60px;
     height: 80px;
@@ -51,23 +47,54 @@
     box-shadow: 0 0 15px #ff00aa, 0 0 30px #6e00ff;
 }
 
-/* Terceira tela atrasada */
-#loader .screens:nth-child(2) {
-    animation-delay: 0.4s;
-}
-#loader .screens:nth-child(3) {
-    animation-delay: 0.8s;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
+.screens:nth-child(1) { animation-delay: 0s; }
+.screens:nth-child(2) { animation-delay: 0.4s; }
+.screens:nth-child(3) { animation-delay: 0.8s; }
 
 @keyframes slide {
     0% { transform: translate(-50%, -50%) translateX(-40px) scale(0.7); opacity: 0.3; }
     50% { transform: translate(-50%, -50%) translateX(0px) scale(1); opacity: 1; }
     100% { transform: translate(-50%, -50%) translateX(40px) scale(0.7); opacity: 0.3; }
+}
+
+/* Texto girando */
+.text-rotate {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: rotate 2s linear infinite;
+}
+
+.text-rotate span {
+    position: absolute;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+}
+
+/* Colocar as letras ao redor do círculo */
+.text-rotate span:nth-child(1){ transform: rotate(0deg) translate(75px) rotate(0deg); }
+.text-rotate span:nth-child(2){ transform: rotate(30deg) translate(75px) rotate(-30deg); }
+.text-rotate span:nth-child(3){ transform: rotate(60deg) translate(75px) rotate(-60deg); }
+.text-rotate span:nth-child(4){ transform: rotate(90deg) translate(75px) rotate(-90deg); }
+.text-rotate span:nth-child(5){ transform: rotate(120deg) translate(75px) rotate(-120deg); }
+.text-rotate span:nth-child(6){ transform: rotate(150deg) translate(75px) rotate(-150deg); }
+.text-rotate span:nth-child(7){ transform: rotate(180deg) translate(75px) rotate(-180deg); }
+.text-rotate span:nth-child(8){ transform: rotate(210deg) translate(75px) rotate(-210deg); }
+.text-rotate span:nth-child(9){ transform: rotate(240deg) translate(75px) rotate(-240deg); }
+.text-rotate span:nth-child(10){ transform: rotate(270deg) translate(75px) rotate(-270deg); }
+.text-rotate span:nth-child(11){ transform: rotate(300deg) translate(75px) rotate(-300deg); }
+.text-rotate span:nth-child(12){ transform: rotate(330deg) translate(75px) rotate(-330deg); }
+
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 body {
@@ -167,12 +194,16 @@ footer { padding: 15px; background: rgba(0,0,0,0.2); font-size: 0.9em; }
 </head>
 <body>
 
-<!-- Loader estilo Play Store -->
+<!-- Loader com texto girando -->
 <div id="loader">
-    <div class="circle"></div>
-    <div class="screens"></div>
-    <div class="screens"></div>
-    <div class="screens"></div>
+    <div class="loader-container">
+        <div class="screens"></div>
+        <div class="screens"></div>
+        <div class="screens"></div>
+        <div class="text-rotate">
+            <span>D</span><span>a</span><span>r</span><span>k</span><span> </span><span>S</span><span>t</span><span>a</span><span>r</span><span> </span><span>D</span><span>S</span>
+        </div>
+    </div>
 </div>
 
 <header>
@@ -233,7 +264,7 @@ function toggleMenu() {
     else { menu.style.display = "flex"; }
 }
 
-// Loader permanece por 7 segundos
+// Loader visível por 7 segundos
 window.addEventListener("load", function(){
     const loader = document.getElementById("loader");
     setTimeout(() => {
