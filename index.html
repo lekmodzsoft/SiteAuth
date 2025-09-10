@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Metamorfose Agência</title>
 
 <!-- Google Fonts -->
@@ -12,71 +12,161 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
-/* ============ LOADER ============ */
+/* ===================== LOADER FIXADO ===================== */
 #loader {
     position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
+    inset: 0;
     background: linear-gradient(135deg, #00c6ff, #7d2ae8);
-    display: flex; flex-direction: column;
-    justify-content: center; align-items: center;
-    z-index: 3000; color: white;
-    font-family: 'Poppins', sans-serif;
-    transition: opacity 0.6s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3000;
     overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+    font-family: 'Poppins', sans-serif;
 }
+
+/* Container central do loader (garante centralização perfeita) */
+.loader-inner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    z-index: 3020; /* acima das borboletas */
+    padding: 18px;
+}
+
+/* Título */
 .loader-title {
-    font-size: 2.5em; font-weight: 700;
-    margin-bottom: 20px; text-shadow: 0 3px 15px black;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: white;
+    text-shadow: 0 6px 18px rgba(0,0,0,0.35);
+    margin: 0;
+    line-height: 1;
 }
+
+/* Spinner circular (visível no centro) */
 .progress-circle {
-    width: 120px; height: 120px; border-radius: 50%;
-    border: 10px solid rgba(255,255,255,0.2);
-    border-top: 10px solid #00ffe7;
-    animation: spin 2s linear infinite;
-    position: relative; z-index: 10;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+    background: radial-gradient(circle at 35% 25%, rgba(255,255,255,0.06), transparent 30%),
+                conic-gradient(from 0deg, rgba(255,255,255,0.14), rgba(255,255,255,0.06)),
+                rgba(255,255,255,0.03);
+    overflow: visible;
 }
-@keyframes spin { 0% { transform: rotate(0);} 100%{transform:rotate(360deg);} }
+
+/* Animação de rotação suave do anel externo */
+.progress-circle::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 10px solid rgba(255,255,255,0.12);
+    border-top-color: #00ffe7;
+    animation: spin 1.9s linear infinite;
+}
+
+/* Texto pequeno dentro do círculo */
+.progress-circle .center-dot {
+    width: 60%;
+    height: 60%;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 700;
+    font-size: 0.95rem;
+    background: rgba(255,255,255,0.03);
+    text-shadow: 0 4px 10px rgba(0,0,0,0.35);
+}
+
+/* keyframes spin */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Área para as borboletas (ocupando todo o loader, mas atrás do conteúdo) */
+.loader-butterflies {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 3010; /* atrás do conteúdo principal do loader */
+}
+
+/* Borboletas individuais (posições iniciais por inline style) */
 .butterfly {
     position: absolute;
     font-size: 28px;
-    animation: fly 6s infinite ease-in-out;
-    opacity: 0.9;
+    will-change: transform, opacity;
+    filter: drop-shadow(0 6px 8px rgba(0,0,0,0.25));
+    transform-origin: center;
+    opacity: 0.95;
 }
-@keyframes fly {
-    0% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-50px) rotate(20deg); }
-    100% { transform: translateY(0) rotate(0deg); }
-}
-.loader-subtitle { margin-top: 25px; font-size: 1.2em; text-shadow: 0 3px 10px black; }
 
-/* ============ BODY / LAYOUT ============ */
-body {
-    margin: 0; font-family: 'Poppins', sans-serif;
-    background: #f4f6fb; color: #333;
+/* Movimento genérico (variaremos delay/duration por elemento inline) */
+@keyframes flutter {
+    0%   { transform: translate(0,0) rotate(0deg) scale(1); opacity: 0.9; }
+    25%  { transform: translate(30px,-40px) rotate(18deg) scale(1.05); opacity: 1; }
+    50%  { transform: translate(70px,0) rotate(-14deg) scale(0.95); opacity: 0.95; }
+    75%  { transform: translate(35px,30px) rotate(12deg) scale(1.03); opacity: 1; }
+    100% { transform: translate(0,0) rotate(0deg) scale(1); opacity: 0.9; }
 }
+
+/* Variedade: usamos a mesma keyframe, mas cada borboleta tem duration/delay diferentes */
+.butterfly.animate { animation-name: flutter; animation-timing-function: ease-in-out; animation-iteration-count: infinite; }
+
+/* Subtítulo do loader */
+.loader-subtitle {
+    color: white;
+    font-size: 1.05rem;
+    font-weight: 600;
+    text-shadow: 0 4px 10px rgba(0,0,0,0.25);
+}
+
+/* Garantia de responsividade */
+@media (max-width: 480px) {
+    .loader-title { font-size: 1.6rem; }
+    .progress-circle { width: 110px; height: 110px; }
+    .butterfly { font-size: 22px; }
+}
+
+/* ===================== RESTANTE DO SITE (mantive o layout que já estava) ===================== */
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: #f4f6fb;
+    color: #333;
+}
+
+/* header, features, sponsors, modal e botões - mantendo como versão anterior funcional */
 header {
     position: relative;
     background: linear-gradient(135deg, #00c6ff, #7d2ae8);
-    color: white; padding: 80px 20px; text-align: center;
+    color: white;
+    padding: 80px 20px;
+    text-align: center;
     border-bottom-left-radius: 60px; border-bottom-right-radius: 60px;
     box-shadow: 0 6px 25px rgba(0,0,0,0.2);
 }
 header h1 { font-size: 3em; margin-bottom: 15px; }
 header p.subtitle { font-size: 1.3em; margin-bottom: 10px; }
 header p.agency-info { max-width: 650px; margin: 0 auto 20px; font-size: 1.05em; color: #f0f0f0; }
-
-/* Menu fixo */
-.navbar {
-    position: absolute; top: 20px; right: 20px;
-    display: flex; gap: 20px;
-}
-.navbar a {
-    color: white; text-decoration: none; font-weight: 500;
-    transition: 0.3s;
-}
+.navbar { position: absolute; top: 20px; right: 20px; display: flex; gap: 20px; }
+.navbar a { color: white; text-decoration: none; font-weight: 500; transition: 0.3s; }
 .navbar a:hover { color: #00ffe7; }
 
-/* Botões modernos */
 .btn-container { margin-top: 30px; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
 .btn, .btn-whatsapp {
     padding: 15px 25px; font-size: 1.2em; font-weight: 600;
@@ -91,99 +181,61 @@ header p.agency-info { max-width: 650px; margin: 0 auto 20px; font-size: 1.05em;
 .btn-whatsapp:hover { background: #1ebe57; transform: scale(1.05); }
 
 /* Features em grid */
-section.features {
-    padding: 60px 20px; max-width: 1100px; margin: auto;
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;
-}
-.feature {
-    background: rgba(255,255,255,0.6);
-    backdrop-filter: blur(10px);
-    border-radius: 20px; padding: 25px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-    transition: 0.3s;
-}
+section.features { padding: 60px 20px; max-width: 1100px; margin: auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+.feature { background: rgba(255,255,255,0.6); backdrop-filter: blur(10px); border-radius: 20px; padding: 25px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); transition: 0.3s; }
 .feature:hover { transform: translateY(-5px); }
 .feature h3 { font-size: 1.4em; display: flex; align-items: center; gap: 10px; margin-top: 0; }
 .feature p { font-size: 1em; color: #444; }
 
-/* Sponsors */
-section.sponsors-section {
-    padding: 60px 20px; background: #fff;
-    text-align: center;
-}
-.sponsors {
-    display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;
-}
-.sponsor-card {
-    width: 150px; height: 150px; border-radius: 50%;
-    background: linear-gradient(135deg,#7d2ae8,#00c6ff);
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    color: white; font-weight: bold; transition: 0.3s;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-}
+section.sponsors-section { padding: 60px 20px; background: #fff; text-align: center; }
+.sponsors { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
+.sponsor-card { width: 150px; height: 150px; border-radius: 50%; background: linear-gradient(135deg,#7d2ae8,#00c6ff); display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; font-weight: bold; transition: 0.3s; box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
 .sponsor-card:hover { transform: scale(1.1); }
 .sponsor-card img { max-width: 70px; border-radius: 50%; }
 
-/* Like & Views */
-.like-views {
-    margin-top: 20px; display: flex; justify-content: center; gap: 25px;
-}
-.like-views button, .like-views div {
-    background: white; color: #333;
-    padding: 10px 20px; border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    display: flex; align-items: center; gap: 8px; font-weight: 600;
-}
+.like-views { margin-top: 20px; display: flex; justify-content: center; gap: 25px; }
+.like-views button, .like-views div { background: white; color: #333; padding: 10px 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 8px; font-weight: 600; }
 .like-views button { border: none; cursor: pointer; }
 .like-views button:hover { background: #ff0077; color: white; }
 
-/* Modal */
-#infoModal {
-    display: none; position: fixed;
-    z-index: 5000; left: 0; top: 0;
-    width: 100%; height: 100%;
-    background-color: rgba(0,0,0,0.8);
-    justify-content: center; align-items: center;
-}
-.modal-content {
-    background: white; padding: 25px;
-    border-radius: 15px; max-width: 500px; text-align: left;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.3); color: #333;
-}
+#infoModal { display: none; position: fixed; z-index: 5000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); justify-content: center; align-items: center; }
+.modal-content { background: white; padding: 25px; border-radius: 15px; max-width: 500px; text-align: left; box-shadow: 0 6px 20px rgba(0,0,0,0.3); color: #333; }
 .close-modal { position: absolute; top: 10px; right: 15px; font-size: 1.5em; cursor: pointer; }
 
-/* Footer */
 footer { padding: 20px; background: #7d2ae8; color: white; margin-top: 50px; }
 
-/* Float WhatsApp */
-#whatsapp-float {
-    position: fixed; bottom: 20px; right: 20px;
-    width: 60px; height: 60px; border-radius: 50%;
-    background: #25D366; color: white;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 30px; box-shadow: 0 4px 12px rgba(0,0,0,0.6);
-    transition: 0.3s; z-index: 1000;
-}
+#whatsapp-float { position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; border-radius: 50%; background: #25D366; color: white; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 0 4px 12px rgba(0,0,0,0.6); transition: 0.3s; z-index: 1000; }
 #whatsapp-float:hover { background: #1ebe57; transform: scale(1.1); }
 </style>
 </head>
 <body>
 
-<!-- Loader -->
-<div id="loader">
-    <div class="loader-title">METAMORFOSE AGÊNCIA</div>
-    <div class="progress-circle"></div>
-    <!-- Mais borboletas -->
-    <div class="butterfly" style="top:15%; left:20%; animation-delay:0s;">🦋</div>
-    <div class="butterfly" style="top:40%; left:70%; animation-delay:1s;">🦋</div>
-    <div class="butterfly" style="top:60%; left:30%; animation-delay:2s;">🦋</div>
-    <div class="butterfly" style="top:25%; left:80%; animation-delay:3s;">🦋</div>
-    <div class="butterfly" style="top:70%; left:50%; animation-delay:4s;">🦋</div>
-    <div class="butterfly" style="top:50%; left:10%; animation-delay:5s;">🦋</div>
-    <div class="loader-subtitle">Carregando... aguarde</div>
+<!-- ===================== LOADER (CORRIGIDO) ===================== -->
+<div id="loader" aria-hidden="false">
+    <div class="loader-inner" role="status" aria-live="polite">
+        <h2 class="loader-title">METAMORFOSE AGÊNCIA</h2>
+
+        <div class="progress-circle" aria-hidden="true">
+            <div class="center-dot">Carregando</div>
+        </div>
+
+        <div class="loader-subtitle">Aguarde — preparando sua experiência</div>
+    </div>
+
+    <!-- Borboletas: posicionamento inicial via style, cada uma com duração e delay diferentes -->
+    <div class="loader-butterflies" aria-hidden="true">
+        <div class="butterfly animate" style="left:8%; top:12%; animation-duration:6.5s; animation-delay:0.2s;">🦋</div>
+        <div class="butterfly animate" style="left:75%; top:20%; animation-duration:5.6s; animation-delay:0.8s;">🦋</div>
+        <div class="butterfly animate" style="left:55%; top:68%; animation-duration:7.2s; animation-delay:0.4s;">🦋</div>
+        <div class="butterfly animate" style="left:20%; top:60%; animation-duration:6.0s; animation-delay:1.2s;">🦋</div>
+        <div class="butterfly animate" style="left:88%; top:55%; animation-duration:5.2s; animation-delay:0.6s;">🦋</div>
+        <div class="butterfly animate" style="left:44%; top:8%; animation-duration:6.8s; animation-delay:0.1s;">🦋</div>
+        <div class="butterfly animate" style="left:12%; top:36%; animation-duration:7.0s; animation-delay:0.9s;">🦋</div>
+        <div class="butterfly animate" style="left:68%; top:40%; animation-duration:5.8s; animation-delay:0.3s;">🦋</div>
+    </div>
 </div>
 
-<!-- Header -->
+<!-- ===================== RESTO DO SITE ===================== -->
 <header>
     <div class="navbar">
         <a href="javascript:void(0)" onclick="openModal('crescimento')">Crescimento</a>
@@ -193,7 +245,6 @@ footer { padding: 20px; background: #7d2ae8; color: white; margin-top: 50px; }
 
     <h1>Metamorfose Agência</h1>
 
-    <!-- Likes e views -->
     <div class="like-views">
         <button id="likeBtn"><i class="fas fa-heart"></i> <span id="likeCount">0</span></button>
         <div><i class="fas fa-eye"></i> <span id="viewCount">0</span></div>
@@ -202,13 +253,16 @@ footer { padding: 20px; background: #7d2ae8; color: white; margin-top: 50px; }
     <p class="subtitle">Transforme seu talento em ganhos reais!</p>
     <p class="agency-info">Somos uma agência oficial que realiza contratos intermediados com a Bigo Live, garantindo segurança, suporte e maximização dos seus ganhos de forma profissional.</p>
 
+    <div style="margin: 20px auto; max-width: 500px;">
+        <iframe width="100%" height="280" src="https://www.youtube.com/embed/ScMzIvxBSi4" frameborder="0" allowfullscreen></iframe>
+    </div>
+
     <div class="btn-container">
         <a href="https://wa.me/553496741592?text=Quero%20ser%20host%20na%20Bigo%20Live" class="btn"><i class="fa-solid fa-microphone"></i> Quero Ser Host</a>
         <a href="https://wa.me/553496741592?text=Quero%20ser%20host%20na%20Bigo%20Live" class="btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> Chamar no WhatsApp</a>
     </div>
 </header>
 
-<!-- Features -->
 <section class="features">
     <div class="feature" onclick="openModal('crescimento')">
         <h3><i class="fa-solid fa-bolt"></i> Crescimento Rápido</h3>
@@ -224,7 +278,6 @@ footer { padding: 20px; background: #7d2ae8; color: white; margin-top: 50px; }
     </div>
 </section>
 
-<!-- Sponsors -->
 <section class="sponsors-section">
     <h2>Patrocinadores Oficiais</h2>
     <div class="sponsors">
@@ -255,15 +308,18 @@ footer { padding: 20px; background: #7d2ae8; color: white; margin-top: 50px; }
 </a>
 
 <script>
+/* Esconde o loader após o carregamento (mesma lógica que já estava) */
 window.addEventListener("load", function(){
     const loader = document.getElementById("loader");
     setTimeout(() => {
+        // acessível: remove aria-hidden quando escondido
         loader.style.opacity = "0";
+        loader.setAttribute('aria-hidden', 'true');
         setTimeout(() => { loader.style.display = "none"; }, 600);
     }, 5000);
 });
 
-// Like
+// Inicializa like / view (mantive sua lógica original)
 let likeCount = localStorage.getItem('likeCount') || 0;
 document.getElementById('likeCount').innerText = likeCount;
 document.getElementById('likeBtn').addEventListener('click', () => {
@@ -272,13 +328,12 @@ document.getElementById('likeBtn').addEventListener('click', () => {
     document.getElementById('likeCount').innerText = likeCount >= 1000 ? (likeCount/1000).toFixed(1)+'k' : likeCount;
 });
 
-// Views
 let viewCount = localStorage.getItem('viewCount') || 0;
 viewCount++;
 localStorage.setItem('viewCount', viewCount);
 document.getElementById('viewCount').innerText = viewCount >= 1000 ? (viewCount/1000).toFixed(1)+'k' : viewCount;
 
-// Modal
+/* Modal */
 function openModal(feature) {
     const modal = document.getElementById('infoModal');
     const title = document.getElementById('modalTitle');
@@ -295,8 +350,21 @@ function openModal(feature) {
     }
     modal.style.display = 'flex';
 }
-function closeModal() { document.getElementById('infoModal').style.display = 'none'; }
-window.onclick = function(event) { if (event.target === document.getElementById('infoModal')) closeModal(); }
+function closeModal() {
+    document.getElementById('infoModal').style.display = 'none';
+}
+window.onclick = function(event) {
+    if (event.target === document.getElementById('infoModal')) closeModal();
+}
+
+/* Pequena melhoria: garante que todas as borboletas tenham a classe animate e animação válida (caso sejam inseridas dinamicamente) */
+document.querySelectorAll('.butterfly').forEach((el, idx) => {
+    // assegura que cada uma tenha duração/delay se não foi definida inline
+    if (!el.style.animationDuration) el.style.animationDuration = (5.5 + (idx % 4) * 0.8) + 's';
+    if (!el.style.animationDelay) el.style.animationDelay = (idx * 0.18) + 's';
+    // já temos a classe "animate" no HTML, mas reforçamos
+    el.classList.add('animate');
+});
 </script>
 
 </body>
