@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -13,158 +12,148 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
-/* Loader com progress circular e borboletas */
+/* ============ LOADER ============ */
 #loader {
     position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: linear-gradient(135deg, #0093E9, #8E2DE2);
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(135deg, #00c6ff, #7d2ae8);
     display: flex; flex-direction: column;
     justify-content: center; align-items: center;
-    z-index: 2000; color: white;
+    z-index: 3000; color: white;
     font-family: 'Poppins', sans-serif;
     transition: opacity 0.6s ease;
+    overflow: hidden;
 }
 .loader-title {
-    font-size: 2.2em; font-weight: 700;
-    margin-bottom: 25px; text-shadow: 0 3px 10px black;
+    font-size: 2.5em; font-weight: 700;
+    margin-bottom: 20px; text-shadow: 0 3px 15px black;
 }
 .progress-circle {
     width: 120px; height: 120px; border-radius: 50%;
     border: 10px solid rgba(255,255,255,0.2);
     border-top: 10px solid #00ffe7;
     animation: spin 2s linear infinite;
-    position: relative;
+    position: relative; z-index: 10;
 }
-@keyframes spin {
-    0% { transform: rotate(0); }
-    100% { transform: rotate(360deg); }
-}
-/* Borboletas */
+@keyframes spin { 0% { transform: rotate(0);} 100%{transform:rotate(360deg);} }
 .butterfly {
     position: absolute;
     font-size: 28px;
-    animation: fly 6s infinite linear;
-    opacity: 0.8;
+    animation: fly 6s infinite ease-in-out;
+    opacity: 0.9;
 }
-.butterfly:nth-child(1){ top:20%; left:30%; animation-delay:0s;}
-.butterfly:nth-child(2){ top:60%; left:70%; animation-delay:2s;}
-.butterfly:nth-child(3){ top:40%; left:10%; animation-delay:4s;}
 @keyframes fly {
     0% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-40px) rotate(20deg); }
+    50% { transform: translateY(-50px) rotate(20deg); }
     100% { transform: translateY(0) rotate(0deg); }
 }
-.loader-subtitle {
-    margin-top: 25px; font-size: 1.2em;
-    text-shadow: 0 3px 10px black;
-}
+.loader-subtitle { margin-top: 25px; font-size: 1.2em; text-shadow: 0 3px 10px black; }
 
-/* Body */
+/* ============ BODY / LAYOUT ============ */
 body {
-    font-family: 'Poppins', sans-serif;
-    margin: 0;
-    background: linear-gradient(135deg, #0093E9, #8E2DE2);
-    color: white; text-align: center;
+    margin: 0; font-family: 'Poppins', sans-serif;
+    background: #f4f6fb; color: #333;
 }
-
-/* Header */
 header {
-    padding: 30px 20px; position: relative;
+    position: relative;
+    background: linear-gradient(135deg, #00c6ff, #7d2ae8);
+    color: white; padding: 80px 20px; text-align: center;
+    border-bottom-left-radius: 60px; border-bottom-right-radius: 60px;
+    box-shadow: 0 6px 25px rgba(0,0,0,0.2);
 }
-header h1 { font-size: 2.5em; margin-bottom: 10px; text-shadow: 0 3px 10px black; }
+header h1 { font-size: 3em; margin-bottom: 15px; }
 header p.subtitle { font-size: 1.3em; margin-bottom: 10px; }
-header p.agency-info { max-width: 650px; margin: 0 auto 20px; font-size: 1.05em; color: #e8e8e8; }
+header p.agency-info { max-width: 650px; margin: 0 auto 20px; font-size: 1.05em; color: #f0f0f0; }
 
-/* Menu */
-.hamburger { position: absolute; top: 35px; right: 25px; font-size: 2em; cursor: pointer; }
-.menu {
-    display: none; flex-direction: column;
-    background: rgba(0,0,0,0.7);
-    position: absolute; right: 25px; top: 70px;
-    padding: 15px; border-radius: 12px; text-align: left;
+/* Menu fixo */
+.navbar {
+    position: absolute; top: 20px; right: 20px;
+    display: flex; gap: 20px;
 }
-.menu a { color: white; margin-bottom: 10px; text-decoration: none; font-weight: 500; }
-.menu a:hover { color: #00ffe7; }
-
-/* Botões */
-.btn-container { margin-top: 25px; display: flex; flex-direction: column; gap: 15px; align-items: center; }
-.btn, .btn-whatsapp {
-    padding: 16px 24px; font-size: 1.3em; font-weight: 600;
-    border-radius: 12px; text-decoration: none;
-    display: inline-flex; align-items: center; gap: 10px;
-    transition: 0.3s; justify-content: center;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.6);
-}
-.btn { background: #ff0077; color: white; }
-.btn:hover { background: #ff3399; transform: translateY(-3px); }
-.btn-whatsapp { background: #25D366; color: white; }
-.btn-whatsapp:hover { background: #1ebe57; transform: translateY(-3px); }
-
-/* Features */
-section { padding: 20px; max-width: 850px; margin: auto; }
-.feature {
-    background: rgba(255,255,255,0.08);
-    border-radius: 15px; padding: 20px;
-    margin-bottom: 20px; text-align: left;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.6);
-    cursor: pointer; transition: 0.3s;
-}
-.feature:hover { transform: scale(1.02); }
-.feature h3 { font-size: 1.4em; display: flex; align-items: center; gap: 10px; }
-.feature p { font-size: 1.05em; }
-
-/* Sponsors */
-.sponsors {
-    margin: 40px auto; max-width: 950px;
-    display: flex; flex-wrap: wrap; gap: 30px; justify-content: center;
-}
-.sponsor-card {
-    background: rgba(255,255,255,0.08);
-    padding: 20px; border-radius: 15px;
-    width: 180px; text-align: center;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+.navbar a {
+    color: white; text-decoration: none; font-weight: 500;
     transition: 0.3s;
 }
-.sponsor-card:hover { transform: scale(1.05); box-shadow: 0 6px 20px black; }
-.sponsor-card img { max-width: 80px; margin-bottom: 10px; }
-.sponsor-card a { color: white; font-weight: bold; text-decoration: none; }
+.navbar a:hover { color: #00ffe7; }
+
+/* Botões modernos */
+.btn-container { margin-top: 30px; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+.btn, .btn-whatsapp {
+    padding: 15px 25px; font-size: 1.2em; font-weight: 600;
+    border-radius: 50px; text-decoration: none;
+    display: flex; align-items: center; gap: 10px;
+    transition: 0.3s; box-shadow: inset -3px -3px 8px rgba(255,255,255,0.5),
+                                 inset 3px 3px 8px rgba(0,0,0,0.15);
+}
+.btn { background: #ff0077; color: white; }
+.btn:hover { background: #ff3399; transform: scale(1.05); }
+.btn-whatsapp { background: #25D366; color: white; }
+.btn-whatsapp:hover { background: #1ebe57; transform: scale(1.05); }
+
+/* Features em grid */
+section.features {
+    padding: 60px 20px; max-width: 1100px; margin: auto;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;
+}
+.feature {
+    background: rgba(255,255,255,0.6);
+    backdrop-filter: blur(10px);
+    border-radius: 20px; padding: 25px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    transition: 0.3s;
+}
+.feature:hover { transform: translateY(-5px); }
+.feature h3 { font-size: 1.4em; display: flex; align-items: center; gap: 10px; margin-top: 0; }
+.feature p { font-size: 1em; color: #444; }
+
+/* Sponsors */
+section.sponsors-section {
+    padding: 60px 20px; background: #fff;
+    text-align: center;
+}
+.sponsors {
+    display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;
+}
+.sponsor-card {
+    width: 150px; height: 150px; border-radius: 50%;
+    background: linear-gradient(135deg,#7d2ae8,#00c6ff);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    color: white; font-weight: bold; transition: 0.3s;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+.sponsor-card:hover { transform: scale(1.1); }
+.sponsor-card img { max-width: 70px; border-radius: 50%; }
 
 /* Like & Views */
 .like-views {
-    margin: 20px auto; display: flex;
-    justify-content: center; align-items: center; gap: 30px;
+    margin-top: 20px; display: flex; justify-content: center; gap: 25px;
 }
 .like-views button, .like-views div {
-    background: rgba(255,255,255,0.08);
-    padding: 12px 20px; border-radius: 15px;
-    display: flex; align-items: center; gap: 10px;
-    font-size: 1.1em; box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+    background: white; color: #333;
+    padding: 10px 20px; border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    display: flex; align-items: center; gap: 8px; font-weight: 600;
 }
 .like-views button { border: none; cursor: pointer; }
-.like-views button:hover { background: #ff0077; }
-.like-views div:hover { background: rgba(255,255,255,0.2); }
+.like-views button:hover { background: #ff0077; color: white; }
 
 /* Modal */
 #infoModal {
     display: none; position: fixed;
     z-index: 5000; left: 0; top: 0;
     width: 100%; height: 100%;
-    background-color: rgba(0,0,0,0.85);
+    background-color: rgba(0,0,0,0.8);
     justify-content: center; align-items: center;
 }
 .modal-content {
-    background: rgba(255,255,255,0.1);
-    padding: 25px; border-radius: 15px;
-    max-width: 500px; color: white;
-    text-align: left; position: relative;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+    background: white; padding: 25px;
+    border-radius: 15px; max-width: 500px; text-align: left;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3); color: #333;
 }
-.modal-content h3 { margin-top: 0; }
 .close-modal { position: absolute; top: 10px; right: 15px; font-size: 1.5em; cursor: pointer; }
 
 /* Footer */
-footer { padding: 20px; background: rgba(0,0,0,0.3); margin-top: 30px; }
+footer { padding: 20px; background: #7d2ae8; color: white; margin-top: 50px; }
 
 /* Float WhatsApp */
 #whatsapp-float {
@@ -176,11 +165,6 @@ footer { padding: 20px; background: rgba(0,0,0,0.3); margin-top: 30px; }
     transition: 0.3s; z-index: 1000;
 }
 #whatsapp-float:hover { background: #1ebe57; transform: scale(1.1); }
-
-/* Responsivo */
-@media (min-width: 768px) {
-    .btn-container { flex-direction: row; }
-}
 </style>
 </head>
 <body>
@@ -189,16 +173,27 @@ footer { padding: 20px; background: rgba(0,0,0,0.3); margin-top: 30px; }
 <div id="loader">
     <div class="loader-title">METAMORFOSE AGÊNCIA</div>
     <div class="progress-circle"></div>
-    <div class="butterfly">🦋</div>
-    <div class="butterfly">🦋</div>
-    <div class="butterfly">🦋</div>
+    <!-- Mais borboletas -->
+    <div class="butterfly" style="top:15%; left:20%; animation-delay:0s;">🦋</div>
+    <div class="butterfly" style="top:40%; left:70%; animation-delay:1s;">🦋</div>
+    <div class="butterfly" style="top:60%; left:30%; animation-delay:2s;">🦋</div>
+    <div class="butterfly" style="top:25%; left:80%; animation-delay:3s;">🦋</div>
+    <div class="butterfly" style="top:70%; left:50%; animation-delay:4s;">🦋</div>
+    <div class="butterfly" style="top:50%; left:10%; animation-delay:5s;">🦋</div>
     <div class="loader-subtitle">Carregando... aguarde</div>
 </div>
 
+<!-- Header -->
 <header>
+    <div class="navbar">
+        <a href="javascript:void(0)" onclick="openModal('crescimento')">Crescimento</a>
+        <a href="javascript:void(0)" onclick="openModal('contratos')">Contratos</a>
+        <a href="javascript:void(0)" onclick="openModal('pagamentos')">Pagamentos</a>
+    </div>
+
     <h1>Metamorfose Agência</h1>
 
-    <!-- Like & Views -->
+    <!-- Likes e views -->
     <div class="like-views">
         <button id="likeBtn"><i class="fas fa-heart"></i> <span id="likeCount">0</span></button>
         <div><i class="fas fa-eye"></i> <span id="viewCount">0</span></div>
@@ -207,24 +202,14 @@ footer { padding: 20px; background: rgba(0,0,0,0.3); margin-top: 30px; }
     <p class="subtitle">Transforme seu talento em ganhos reais!</p>
     <p class="agency-info">Somos uma agência oficial que realiza contratos intermediados com a Bigo Live, garantindo segurança, suporte e maximização dos seus ganhos de forma profissional.</p>
 
-    <i class="fas fa-bars hamburger" onclick="toggleMenu()"></i>
-    <div class="menu" id="menu">
-        <a href="javascript:void(0)" onclick="openModal('crescimento')"><i class="fas fa-bolt"></i> Crescimento Rápido</a>
-        <a href="javascript:void(0)" onclick="openModal('contratos')"><i class="fas fa-file-contract"></i> Contratos Seguros</a>
-        <a href="javascript:void(0)" onclick="openModal('pagamentos')"><i class="fas fa-hand-holding-dollar"></i> Pagamentos Garantidos</a>
-    </div>
-
-    <div style="margin: 20px auto; max-width: 500px;">
-        <iframe width="100%" height="280" src="https://www.youtube.com/embed/ScMzIvxBSi4" frameborder="0" allowfullscreen></iframe>
-    </div>
-
     <div class="btn-container">
         <a href="https://wa.me/553496741592?text=Quero%20ser%20host%20na%20Bigo%20Live" class="btn"><i class="fa-solid fa-microphone"></i> Quero Ser Host</a>
         <a href="https://wa.me/553496741592?text=Quero%20ser%20host%20na%20Bigo%20Live" class="btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> Chamar no WhatsApp</a>
     </div>
 </header>
 
-<section>
+<!-- Features -->
+<section class="features">
     <div class="feature" onclick="openModal('crescimento')">
         <h3><i class="fa-solid fa-bolt"></i> Crescimento Rápido</h3>
         <p>Apoio profissional para impulsionar sua audiência e ganhos no Bigo Live.</p>
@@ -239,21 +224,16 @@ footer { padding: 20px; background: rgba(0,0,0,0.3); margin-top: 30px; }
     </div>
 </section>
 
-<section>
+<!-- Sponsors -->
+<section class="sponsors-section">
     <h2>Patrocinadores Oficiais</h2>
     <div class="sponsors">
         <div class="sponsor-card">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQV1YDc2Px968li3sXR1KKv0l6gln9EtBywZXo8L03X_xRG9w03LEdbNU7y&s=10" alt="Bigo Live">
-            <a href="https://www.bigo.tv" target="_blank">Bigo Live</a>
+            Bigo Live
         </div>
-        <div class="sponsor-card">
-            <i class="fas fa-cloud" style="font-size:50px; margin-bottom:10px;"></i>
-            <a href="https://www.cloudflare.com" target="_blank">Cloudflare</a>
-        </div>
-        <div class="sponsor-card">
-            <i class="fas fa-lock" style="font-size:50px; margin-bottom:10px;"></i>
-            <a href="https://www.metamorfoseagencia.com" target="_blank">Site Seguro</a>
-        </div>
+        <div class="sponsor-card"><i class="fas fa-cloud fa-2x"></i><br>Cloudflare</div>
+        <div class="sponsor-card"><i class="fas fa-lock fa-2x"></i><br>Site Seguro</div>
     </div>
 </section>
 
@@ -275,12 +255,6 @@ footer { padding: 20px; background: rgba(0,0,0,0.3); margin-top: 30px; }
 </a>
 
 <script>
-function toggleMenu() {
-    const menu = document.getElementById('menu');
-    menu.style.display = (menu.style.display === "flex") ? "none" : "flex";
-}
-
-// Loader
 window.addEventListener("load", function(){
     const loader = document.getElementById("loader");
     setTimeout(() => {
@@ -321,13 +295,8 @@ function openModal(feature) {
     }
     modal.style.display = 'flex';
 }
-function closeModal() {
-    document.getElementById('infoModal').style.display = 'none';
-}
-window.onclick = function(event) {
-    const modal = document.getElementById('infoModal');
-    if (event.target === modal) closeModal();
-}
+function closeModal() { document.getElementById('infoModal').style.display = 'none'; }
+window.onclick = function(event) { if (event.target === document.getElementById('infoModal')) closeModal(); }
 </script>
 
 </body>
