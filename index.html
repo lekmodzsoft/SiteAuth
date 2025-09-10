@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
-/* ===================== LOADER FIXADO ===================== */
+/* ===================== LOADER ===================== */
 #loader {
     position: fixed;
     inset: 0;
@@ -20,36 +20,29 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     z-index: 3000;
-    overflow: hidden;
-    -webkit-font-smoothing: antialiased;
-    font-family: 'Poppins', sans-serif;
+    transition: opacity 0.6s ease;
 }
 
-/* Container central do loader (garante centralização perfeita) */
 .loader-inner {
-    position: relative;
     display: flex;
     flex-direction: column;
     gap: 18px;
     align-items: center;
-    justify-content: center;
     text-align: center;
-    z-index: 3020; /* acima das borboletas */
+    z-index: 3020;
     padding: 18px;
 }
 
-/* Título */
 .loader-title {
     font-size: 2.4rem;
     font-weight: 700;
     color: white;
     text-shadow: 0 6px 18px rgba(0,0,0,0.35);
     margin: 0;
-    line-height: 1;
 }
 
-/* Spinner circular (visível no centro) */
 .progress-circle {
     width: 140px;
     height: 140px;
@@ -58,14 +51,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    background: rgba(255,255,255,0.1);
     box-shadow: 0 6px 20px rgba(0,0,0,0.25);
-    background: radial-gradient(circle at 35% 25%, rgba(255,255,255,0.06), transparent 30%),
-                conic-gradient(from 0deg, rgba(255,255,255,0.14), rgba(255,255,255,0.06)),
-                rgba(255,255,255,0.03);
-    overflow: visible;
 }
-
-/* Animação de rotação suave do anel externo */
 .progress-circle::before {
     content: "";
     position: absolute;
@@ -75,8 +63,6 @@
     border-top-color: #00ffe7;
     animation: spin 1.9s linear infinite;
 }
-
-/* Texto pequeno dentro do círculo */
 .progress-circle .center-dot {
     width: 60%;
     height: 60%;
@@ -87,43 +73,10 @@
     color: white;
     font-weight: 700;
     font-size: 0.95rem;
-    background: rgba(255,255,255,0.03);
-    text-shadow: 0 4px 10px rgba(0,0,0,0.35);
+    background: rgba(255,255,255,0.08);
 }
+@keyframes spin { to { transform: rotate(360deg); } }
 
-/* keyframes spin */
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-/* Área para as borboletas (ocupando todo o loader, mas atrás do conteúdo) */
-.loader-butterflies {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 3010; /* atrás do conteúdo principal do loader */
-}
-
-/* Borboletas individuais */
-.butterfly {
-    position: absolute;
-    font-size: 28px;
-    will-change: transform, opacity;
-    filter: drop-shadow(0 6px 8px rgba(0,0,0,0.25));
-    transform-origin: center;
-    opacity: 0.95;
-}
-@keyframes flutter {
-    0%   { transform: translate(0,0) rotate(0deg) scale(1); opacity: 0.9; }
-    25%  { transform: translate(30px,-40px) rotate(18deg) scale(1.05); opacity: 1; }
-    50%  { transform: translate(70px,0) rotate(-14deg) scale(0.95); opacity: 0.95; }
-    75%  { transform: translate(35px,30px) rotate(12deg) scale(1.03); opacity: 1; }
-    100% { transform: translate(0,0) rotate(0deg) scale(1); opacity: 0.9; }
-}
-.butterfly.animate { animation-name: flutter; animation-timing-function: ease-in-out; animation-iteration-count: infinite; }
-
-/* Subtítulo do loader */
 .loader-subtitle {
     color: white;
     font-size: 1.05rem;
@@ -131,11 +84,25 @@
     text-shadow: 0 4px 10px rgba(0,0,0,0.25);
 }
 
-/* Responsividade */
-@media (max-width: 480px) {
-    .loader-title { font-size: 1.6rem; }
-    .progress-circle { width: 110px; height: 110px; }
-    .butterfly { font-size: 22px; }
+/* Borboletas */
+.loader-butterflies {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 3010;
+}
+.butterfly {
+    position: absolute;
+    font-size: 28px;
+    opacity: 0.95;
+    animation: flutter 6s ease-in-out infinite;
+}
+@keyframes flutter {
+    0%   { transform: translate(0,0) rotate(0deg); }
+    25%  { transform: translate(30px,-40px) rotate(15deg); }
+    50%  { transform: translate(70px,0) rotate(-15deg); }
+    75%  { transform: translate(35px,30px) rotate(10deg); }
+    100% { transform: translate(0,0) rotate(0deg); }
 }
 
 /* ===================== RESTANTE DO SITE ===================== */
@@ -151,7 +118,8 @@ header {
     color: white;
     padding: 80px 20px;
     text-align: center;
-    border-bottom-left-radius: 60px; border-bottom-right-radius: 60px;
+    border-bottom-left-radius: 60px;
+    border-bottom-right-radius: 60px;
     box-shadow: 0 6px 25px rgba(0,0,0,0.2);
 }
 header h1 { font-size: 3em; margin-bottom: 15px; }
@@ -167,19 +135,18 @@ header p.agency-info { max-width: 650px; margin: 0 auto 20px; font-size: 1.05em;
     border-radius: 50px; text-decoration: none;
     display: flex; align-items: center; gap: 10px;
     transition: 0.3s;
-    box-shadow: inset -3px -3px 8px rgba(255,255,255,0.5),
-                inset 3px 3px 8px rgba(0,0,0,0.15);
 }
 .btn { background: #ff0077; color: white; }
 .btn:hover { background: #ff3399; transform: scale(1.05); }
 .btn-whatsapp { background: #25D366; color: white; }
 .btn-whatsapp:hover { background: #1ebe57; transform: scale(1.05); }
 .btn-instagram { background: #E1306C; color: white; }
-.btn-instagram:hover { background: #ff4d94; transform: scale(1.05); }
+.btn-instagram:hover { background: #fd1d7c; transform: scale(1.05); }
 
-/* Botões flutuantes */
+/* Float buttons */
 #whatsapp-float, #instagram-float {
     position: fixed;
+    right: 20px;
     width: 60px; height: 60px;
     border-radius: 50%;
     color: white;
@@ -189,159 +156,62 @@ header p.agency-info { max-width: 650px; margin: 0 auto 20px; font-size: 1.05em;
     transition: 0.3s;
     z-index: 1000;
 }
-#whatsapp-float { bottom: 20px; right: 20px; background: #25D366; }
-#whatsapp-float:hover { background: #1ebe57; transform: scale(1.1); }
-#instagram-float { bottom: 90px; right: 20px; background: #E1306C; }
-#instagram-float:hover { background: #ff4d94; transform: scale(1.1); }
+#whatsapp-float { bottom: 20px; background: #25D366; }
+#instagram-float { bottom: 90px; background: #E1306C; }
+#whatsapp-float:hover { transform: scale(1.1); background: #1ebe57; }
+#instagram-float:hover { transform: scale(1.1); background: #fd1d7c; }
 </style>
 </head>
 <body>
 
-<!-- ===================== LOADER ===================== -->
-<div id="loader" aria-hidden="false">
-    <div class="loader-inner" role="status" aria-live="polite">
+<!-- LOADER -->
+<div id="loader">
+    <div class="loader-inner">
         <h2 class="loader-title">METAMORFOSE AGÊNCIA</h2>
         <div class="progress-circle"><div class="center-dot">Carregando</div></div>
         <div class="loader-subtitle">Aguarde — preparando sua experiência</div>
     </div>
-    <div class="loader-butterflies" aria-hidden="true">
-        <div class="butterfly animate" style="left:8%; top:12%; animation-duration:6.5s; animation-delay:0.2s;">🦋</div>
-        <div class="butterfly animate" style="left:75%; top:20%; animation-duration:5.6s; animation-delay:0.8s;">🦋</div>
-        <div class="butterfly animate" style="left:55%; top:68%; animation-duration:7.2s; animation-delay:0.4s;">🦋</div>
-        <div class="butterfly animate" style="left:20%; top:60%; animation-duration:6.0s; animation-delay:1.2s;">🦋</div>
-        <div class="butterfly animate" style="left:88%; top:55%; animation-duration:5.2s; animation-delay:0.6s;">🦋</div>
-        <div class="butterfly animate" style="left:44%; top:8%; animation-duration:6.8s; animation-delay:0.1s;">🦋</div>
-        <div class="butterfly animate" style="left:12%; top:36%; animation-duration:7.0s; animation-delay:0.9s;">🦋</div>
-        <div class="butterfly animate" style="left:68%; top:40%; animation-duration:5.8s; animation-delay:0.3s;">🦋</div>
+    <div class="loader-butterflies">
+        <div class="butterfly" style="left:10%; top:20%; animation-duration:6s; animation-delay:0s;">🦋</div>
+        <div class="butterfly" style="left:70%; top:30%; animation-duration:5s; animation-delay:1s;">🦋</div>
+        <div class="butterfly" style="left:50%; top:70%; animation-duration:7s; animation-delay:0.5s;">🦋</div>
+        <div class="butterfly" style="left:20%; top:60%; animation-duration:6s; animation-delay:1.2s;">🦋</div>
     </div>
 </div>
 
-<!-- ===================== SITE ===================== -->
+<!-- SITE -->
 <header>
     <div class="navbar">
-        <a href="javascript:void(0)" onclick="openModal('crescimento')">Crescimento</a>
-        <a href="javascript:void(0)" onclick="openModal('contratos')">Contratos</a>
-        <a href="javascript:void(0)" onclick="openModal('pagamentos')">Pagamentos</a>
+        <a href="#">Crescimento</a>
+        <a href="#">Contratos</a>
+        <a href="#">Pagamentos</a>
     </div>
-
     <h1>Metamorfose Agência</h1>
-
-    <div class="like-views">
-        <button id="likeBtn"><i class="fas fa-heart"></i> <span id="likeCount">0</span></button>
-        <div><i class="fas fa-eye"></i> <span id="viewCount">0</span></div>
-    </div>
-
     <p class="subtitle">Transforme seu talento em ganhos reais!</p>
-    <p class="agency-info">Somos uma agência oficial que realiza contratos intermediados com a Bigo Live, garantindo segurança, suporte e maximização dos seus ganhos de forma profissional.</p>
-
-    <div style="margin: 20px auto; max-width: 500px;">
-        <iframe width="100%" height="280" src="https://www.youtube.com/embed/ScMzIvxBSi4" frameborder="0" allowfullscreen></iframe>
-    </div>
-
+    <p class="agency-info">Somos uma agência oficial que realiza contratos intermediados com a Bigo Live.</p>
     <div class="btn-container">
-        <a href="https://wa.me/553496741592?text=Quero%20ser%20host%20na%20Bigo%20Live" class="btn"><i class="fa-solid fa-microphone"></i> Quero Ser Host</a>
-        <a href="https://wa.me/553496741592?text=Quero%20ser%20host%20na%20Bigo%20Live" class="btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> Chamar no WhatsApp</a>
+        <a href="https://wa.me/553496741592" class="btn"><i class="fa-solid fa-microphone"></i> Quero Ser Host</a>
+        <a href="https://wa.me/553496741592" class="btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> Chamar no WhatsApp</a>
         <a href="https://instagram.com/seuusuario" target="_blank" class="btn-instagram"><i class="fa-brands fa-instagram"></i> Chamar no Instagram</a>
     </div>
 </header>
-
-<section class="features">
-    <div class="feature" onclick="openModal('crescimento')">
-        <h3><i class="fa-solid fa-bolt"></i> Crescimento Rápido</h3>
-        <p>Apoio profissional para impulsionar sua audiência e ganhos no Bigo Live.</p>
-    </div>
-    <div class="feature" onclick="openModal('contratos')">
-        <h3><i class="fa-solid fa-file-contract"></i> Contratos Seguros</h3>
-        <p>Assinatura de contratos com respaldo e suporte oficial da plataforma.</p>
-    </div>
-    <div class="feature" onclick="openModal('pagamentos')">
-        <h3><i class="fa-solid fa-hand-holding-dollar"></i> Pagamentos Garantidos</h3>
-        <p>Receba seus pagamentos sempre em dia e com transparência total.</p>
-    </div>
-</section>
-
-<section class="sponsors-section">
-    <h2>Patrocinadores Oficiais</h2>
-    <div class="sponsors">
-        <div class="sponsor-card">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQV1YDc2Px968li3sXR1KKv0l6gln9EtBywZXo8L03X_xRG9w03LEdbNU7y&s=10" alt="Bigo Live">
-            Bigo Live
-        </div>
-        <div class="sponsor-card"><i class="fas fa-cloud fa-2x"></i><br>Cloudflare</div>
-        <div class="sponsor-card"><i class="fas fa-lock fa-2x"></i><br>Site Seguro</div>
-    </div>
-</section>
-
-<!-- Modal -->
-<div id="infoModal">
-    <div class="modal-content">
-        <span class="close-modal" onclick="closeModal()">&times;</span>
-        <h3 id="modalTitle"></h3>
-        <p id="modalText"></p>
-    </div>
-</div>
 
 <footer>
     &copy; 2025 Metamorfose Agência - Todos os direitos reservados.
 </footer>
 
 <!-- Botões flutuantes -->
-<a href="https://wa.me/553496741592?text=Quero%20ser%20host%20na%20Bigo%20Live" target="_blank" id="whatsapp-float">
-    <i class="fab fa-whatsapp"></i>
-</a>
-<a href="https://instagram.com/seuusuario" target="_blank" id="instagram-float">
-    <i class="fab fa-instagram"></i>
-</a>
+<a href="https://wa.me/553496741592" target="_blank" id="whatsapp-float"><i class="fab fa-whatsapp"></i></a>
+<a href="https://instagram.com/seuusuario" target="_blank" id="instagram-float"><i class="fab fa-instagram"></i></a>
 
 <script>
-/* Loader */
 window.addEventListener("load", function(){
     const loader = document.getElementById("loader");
     setTimeout(() => {
         loader.style.opacity = "0";
-        loader.setAttribute('aria-hidden', 'true');
         setTimeout(() => { loader.style.display = "none"; }, 600);
-    }, 5000);
+    }, 3000); // 3 segundos de loading
 });
-
-/* Likes e Views */
-let likeCount = localStorage.getItem('likeCount') || 0;
-document.getElementById('likeCount').innerText = likeCount;
-document.getElementById('likeBtn').addEventListener('click', () => {
-    likeCount++;
-    localStorage.setItem('likeCount', likeCount);
-    document.getElementById('likeCount').innerText = likeCount >= 1000 ? (likeCount/1000).toFixed(1)+'k' : likeCount;
-});
-let viewCount = localStorage.getItem('viewCount') || 0;
-viewCount++;
-localStorage.setItem('viewCount', viewCount);
-document.getElementById('viewCount').innerText = viewCount >= 1000 ? (viewCount/1000).toFixed(1)+'k' : viewCount;
-
-/* Modal */
-function openModal(feature) {
-    const modal = document.getElementById('infoModal');
-    const title = document.getElementById('modalTitle');
-    const text = document.getElementById('modalText');
-    if(feature === 'crescimento') {
-        title.innerText = 'Crescimento Rápido';
-        text.innerText = 'Estratégias personalizadas para impulsionar seu perfil no Bigo Live.';
-    } else if(feature === 'contratos') {
-        title.innerText = 'Contratos Seguros';
-        text.innerText = 'Contratos claros e oficiais intermediados pela Bigo Live.';
-    } else if(feature === 'pagamentos') {
-        title.innerText = 'Pagamentos Garantidos';
-        text.innerText = 'Receba seus ganhos de forma rápida e transparente.';
-    }
-    modal.style.display = 'flex';
-}
-function closeModal() {
-    document.getElementById('infoModal').style.display = 'none';
-}
-window.onclick = function(event) {
-    if (event.target === document.getElementById('infoModal')) closeModal();
-}
-
-/* Borboletas */
-document.querySelectorAll('.butterfly').forEach((el, idx) => {
-    if (!el.style.animationDuration) el.style.animationDuration = (5.5 + (idx % 4) * 0.8) + 's';
-    if
+</script>
+</body>
+</html>
