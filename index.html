@@ -71,25 +71,6 @@
         box-shadow: 0 0 5px #0ff, 0 0 15px #0ff, 0 0 25px #0ff, 0 0 30px #f0f;
     }
 
-    /* Efeito de scaneamento */
-    .scan-line {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 2px;
-        background: linear-gradient(to right, transparent, #0ff, transparent);
-        animation: scan-move 4s linear infinite;
-        pointer-events: none;
-        z-index: 999;
-        opacity: 0.8;
-    }
-
-    @keyframes scan-move {
-        0% { transform: translateY(0); }
-        100% { transform: translateY(100vh); }
-    }
-
     /* Loader */
     #loader {
         position: fixed;
@@ -185,61 +166,6 @@
     header h1 { font-family: 'Orbitron', sans-serif; font-size: 3em; font-weight: 700; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 3px; }
     header p.subtitle { font-size: 1.2em; margin-bottom: 10px; color: #a5f3ff; }
     header p.agency-info { font-size: 1em; margin-bottom: 20px; color: #b2f2ff; max-width: 600px; margin-left: auto; margin-right: auto; }
-
-    /* Estilo do holograma */
-    .hologram-container {
-        position: relative;
-        width: 150px;
-        height: 150px;
-        margin: 20px auto 40px;
-        transform-style: preserve-3d;
-        perspective: 800px;
-    }
-    .hologram-sphere {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        border: 2px solid #0ff;
-        border-radius: 50%;
-        transform-style: preserve-3d;
-        animation: rotate-hologram 10s linear infinite;
-        box-shadow: 0 0 15px #0ff, inset 0 0 15px #0ff;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .hologram-line {
-        position: absolute;
-        width: 150px;
-        height: 2px;
-        background: #0ff;
-        box-shadow: 0 0 5px #0ff, 0 0 10px #0ff;
-        border-radius: 2px;
-    }
-    .hologram-line:nth-child(1) { transform: rotate(0deg) translateY(0); }
-    .hologram-line:nth-child(2) { transform: rotate(90deg) translateY(0); }
-    .hologram-line:nth-child(3) { transform: rotate(45deg) translateY(0); }
-    .hologram-line:nth-child(4) { transform: rotate(-45deg) translateY(0); }
-
-    .hologram-sphere::before {
-        content: '';
-        position: absolute;
-        width: 120%;
-        height: 120%;
-        border-radius: 50%;
-        border: 1px dotted #0ff;
-        animation: hologram-pulse 2s ease-in-out infinite alternate;
-        opacity: 0.5;
-    }
-
-    @keyframes rotate-hologram {
-        from { transform: rotateY(0deg) rotateX(0deg); }
-        to { transform: rotateY(360deg) rotateX(360deg); }
-    }
-    @keyframes hologram-pulse {
-        from { transform: scale(1); opacity: 0.5; }
-        to { transform: scale(1.1); opacity: 0.8; }
-    }
 
     .hamburger { position: absolute; top: 25px; right: 25px; font-size: 1.8em; cursor: pointer; color: #0ff; }
     .menu { display: none; flex-direction: column; position: absolute; right: 20px; top: 60px; padding: 15px; border-radius: 10px; text-align: left; z-index: 1000; }
@@ -427,16 +353,6 @@
     </div>
 
     <h1>Dark Star Agência</h1>
-    
-    <div class="hologram-container">
-        <div class="hologram-sphere">
-            <div class="hologram-line"></div>
-            <div class="hologram-line"></div>
-            <div class="hologram-line"></div>
-            <div class="hologram-line"></div>
-        </div>
-    </div>
-
     <p class="subtitle">Transforme seu talento em ganhos reais!</p>
     <p class="agency-info">Somos uma agência oficial que realiza contratos intermediados com a Bigo Live, garantindo segurança, suporte e maximização dos seus ganhos de forma profissional.</p>
 
