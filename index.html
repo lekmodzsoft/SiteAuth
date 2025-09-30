@@ -5,239 +5,443 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dark Star Agência</title>
 
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
-<!-- Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
-/* Loader estilo Play Store com telas animadas */
-#loader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, #6e00ff, #b800ff);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 2000;
-    flex-direction: column;
-    color: white;
-    font-family: 'Poppins', sans-serif;
-    transition: opacity 0.5s ease;
-}
+    /* Estilos Gerais - Fundo Futurista */
+    body {
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        color: white;
+        text-align: center;
+        background-color: #04081c;
+        overflow-x: hidden;
+        position: relative;
+    }
 
-.loader-title {
-    font-size: 2em;
-    font-weight: 700;
-    text-shadow: 2px 2px 5px black;
-    margin-bottom: 20px;
-}
+    /* Fundo de campo de estrelas */
+    .star-field {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle, #000 1px, transparent 1px);
+        background-size: 50px 50px;
+        opacity: 0.2;
+        animation: star-move 60s linear infinite;
+        z-index: -2;
+    }
 
-.loader-subtitle {
-    font-size: 1.2em;
-    font-weight: 600;
-    text-shadow: 2px 2px 5px black;
-    margin-top: 20px;
-}
+    @keyframes star-move {
+        from { background-position: 0 0; }
+        to { background-position: 100% 100%; }
+    }
 
-.loader-container {
-    position: relative;
-    width: 150px;
-    height: 150px;
-}
+    /* Efeito de gradiente de néon no topo */
+    body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle at 50% -20%, rgba(68, 0, 255, 0.3), transparent 50%),
+                    radial-gradient(circle at 50% 120%, rgba(255, 0, 119, 0.3), transparent 50%);
+        animation: neon-gradient 10s ease-in-out infinite alternate;
+        z-index: -1;
+    }
 
-.screens {
-    position: absolute;
-    width: 60px;
-    height: 80px;
-    background: white;
-    border-radius: 10px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.8);
-    animation: slide 1.2s infinite;
-    box-shadow: 0 0 15px #ff00aa, 0 0 30px #6e00ff;
-}
+    @keyframes neon-gradient {
+        from { transform: scale(1); }
+        to { transform: scale(1.1); }
+    }
 
-.screens:nth-child(1){ animation-delay: 0s; }
-.screens:nth-child(2){ animation-delay: 0.4s; }
-.screens:nth-child(3){ animation-delay: 0.8s; }
+    /* Efeitos de brilho e vidro (Glassmorphism) */
+    .glass {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    }
+    .neon-border {
+        box-shadow: 0 0 5px #0ff, 0 0 15px #0ff, 0 0 25px #0ff, 0 0 30px #f0f;
+    }
 
-@keyframes slide {
-    0% { transform: translate(-50%, -50%) translateX(-40px) scale(0.7); opacity: 0.3; }
-    50% { transform: translate(-50%, -50%) translateX(0px) scale(1); opacity: 1; }
-    100% { transform: translate(-50%, -50%) translateX(40px) scale(0.7); opacity: 0.3; }
-}
+    /* Efeito de scaneamento */
+    .scan-line {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(to right, transparent, #0ff, transparent);
+        animation: scan-move 4s linear infinite;
+        pointer-events: none;
+        z-index: 999;
+        opacity: 0.8;
+    }
 
-/* Resto do site */
-body {
-    font-family: 'Poppins', sans-serif;
-    margin: 0;
-    background: linear-gradient(135deg, #6e00ff, #b800ff);
-    color: white;
-    text-align: center;
-}
+    @keyframes scan-move {
+        0% { transform: translateY(0); }
+        100% { transform: translateY(100vh); }
+    }
 
-header {
-    padding: 20px;
-    position: relative;
-}
-header h1 { font-size: 2.3em; font-weight: 600; margin-bottom: 5px; text-shadow: 2px 2px 5px black; }
-header p.subtitle { font-size: 1.2em; margin-bottom: 10px; }
-header p.agency-info { font-size: 1em; margin-bottom: 20px; color: #f0f0f0; max-width: 600px; margin-left: auto; margin-right: auto; }
+    /* Loader */
+    #loader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #04081c;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 2000;
+        flex-direction: column;
+        color: white;
+        font-family: 'Orbitron', sans-serif;
+        transition: opacity 0.5s ease;
+    }
 
-.hamburger { position: absolute; top: 25px; right: 25px; font-size: 1.8em; cursor: pointer; }
-.menu { display: none; flex-direction: column; background: rgba(0,0,0,0.8); position: absolute; right: 20px; top: 60px; padding: 15px; border-radius: 10px; text-align: left; z-index: 1000; }
-.menu a { color: white; text-decoration: none; margin-bottom: 10px; display: block; }
-.menu a:hover { color: #ffdd00; }
+    .loader-title {
+        font-size: 2.5em;
+        font-weight: 700;
+        letter-spacing: 2px;
+        margin-bottom: 20px;
+        animation: title-glitch 1.5s infinite alternate;
+    }
 
-.btn-container { margin-top: 20px; display: flex; flex-direction: column; gap: 15px; align-items: center; }
-.btn, .btn-whatsapp {
-    padding: 18px 25px; font-size: 1.4em; font-weight: bold; border-radius: 12px; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; transition: 0.3s; justify-content: center; box-shadow: 0 4px 10px black;
-}
-.btn { background: #ff0077; color: white; }
-.btn:hover { background: #ff3399; transform: scale(1.05); }
-.btn-whatsapp { background: #25D366; color: white; }
-.btn-whatsapp:hover { background: #1ebe57; transform: scale(1.05); }
+    @keyframes title-glitch {
+        0%, 100% { text-shadow: 0 0 5px #0ff; opacity: 1; transform: skewX(0deg); }
+        50% { text-shadow: 0 0 15px #0ff, 0 0 25px #0ff; opacity: 0.8; transform: skewX(-5deg); }
+    }
 
-/* Features */
-section { padding: 20px; max-width: 800px; margin: auto; }
-.feature { background: rgba(255,255,255,0.1); border-radius: 12px; padding: 20px; margin-bottom: 20px; text-align: left; box-shadow: 0 4px 15px black; cursor: pointer; }
-.feature h3 { font-size: 1.3em; margin-bottom: 5px; display: flex; align-items: center; gap: 10px; }
-.feature p { font-size: 1.05em; }
+    .loader-container {
+        width: 150px;
+        height: 5px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 5px;
+        position: relative;
+    }
+    .loader-bar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 0;
+        background: linear-gradient(90deg, #4400ff, #ff0077);
+        border-radius: 5px;
+        animation: load-bar 4s cubic-bezier(0.8, 0.0, 0.2, 1.0) infinite;
+    }
+    .loader-glow {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.5);
+        filter: blur(10px);
+        animation: glow-pulse 4s cubic-bezier(0.8, 0.0, 0.2, 1.0) infinite;
+    }
 
-/* Patrocinadores */
-.sponsors {
-    margin: 40px auto;
-    max-width: 900px;
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    flex-wrap: wrap;
-}
-.sponsor-card {
-    background: rgba(255,255,255,0.1);
-    padding: 15px 25px;
-    border-radius: 15px;
-    box-shadow: 0 4px 15px black;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    transition: 0.3s;
-    width: 180px;
-}
-.sponsor-card img {
-    max-width: 80px;
-    margin-bottom: 10px;
-}
-.sponsor-card i {
-    margin-bottom: 10px;
-}
-.sponsor-card a {
-    text-decoration: none;
-    color: white;
-    font-weight: bold;
-}
-.sponsor-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 20px black;
-}
+    @keyframes load-bar {
+        0% { width: 0; }
+        50% { width: 100%; }
+        100% { width: 0; }
+    }
+    @keyframes glow-pulse {
+        0% { transform: scaleX(0); opacity: 0; }
+        50% { transform: scaleX(1); opacity: 1; }
+        100% { transform: scaleX(0); opacity: 0; }
+    }
 
-/* Botões flutuantes */
-#whatsapp-float { position: fixed; width: 60px; height: 60px; bottom: 20px; right: 20px; background-color: #25D366; color: white; border-radius: 50%; text-align: center; font-size: 30px; z-index: 1000; box-shadow: 0 4px 12px black; display: flex; align-items: center; justify-content: center; transition: 0.3s; }
-#whatsapp-float:hover { background-color: #1ebe57; transform: scale(1.1); }
+    .loader-subtitle {
+        font-size: 1.2em;
+        font-weight: 600;
+        margin-top: 20px;
+        animation: neon-text 1.5s infinite alternate;
+    }
 
-/* Like & Views Container */
-.like-views {
-    margin: 20px auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
-}
-.like-views button, .like-views div {
-    background: rgba(255,255,255,0.1);
-    color: white;
-    padding: 12px 20px;
-    border-radius: 15px;
-    box-shadow: 0 4px 12px black;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 1.2em;
-}
-.like-views button { border: none; cursor: pointer; transition: 0.3s; }
-.like-views button:hover { background: #ff0077; transform: scale(1.05); }
-.like-views div:hover { background: rgba(255,255,255,0.2); }
+    @keyframes neon-text {
+        from { text-shadow: 0 0 2px #f0f; }
+        to { text-shadow: 0 0 10px #f0f, 0 0 20px #f0f; }
+    }
 
-/* Modal */
-#infoModal {
-    display: none;
-    position: fixed;
-    z-index: 5000;
-    left: 0; top: 0;
-    width: 100%; height: 100%;
-    background-color: rgba(0,0,0,0.8);
-    justify-content: center;
-    align-items: center;
-}
-.modal-content {
-    background: rgba(255,255,255,0.1);
-    padding: 25px;
-    border-radius: 15px;
-    max-width: 500px;
-    color: white;
-    text-align: left;
-    box-shadow: 0 4px 15px black;
-    position: relative;
-}
-.modal-content h3 { margin-top: 0; font-size: 1.5em; }
-.modal-content p { font-size: 1.05em; }
-.close-modal {
-    position: absolute;
-    top: 10px; right: 15px;
-    font-size: 1.5em;
-    cursor: pointer;
-}
+    header {
+        padding: 40px 20px;
+        position: relative;
+        animation: fade-in 1s ease-out forwards;
+        opacity: 0;
+    }
+    @keyframes fade-in {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    header h1 { font-family: 'Orbitron', sans-serif; font-size: 3em; font-weight: 700; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 3px; }
+    header p.subtitle { font-size: 1.2em; margin-bottom: 10px; color: #a5f3ff; }
+    header p.agency-info { font-size: 1em; margin-bottom: 20px; color: #b2f2ff; max-width: 600px; margin-left: auto; margin-right: auto; }
 
-/* Responsivo */
-@media (min-width: 768px) { 
-    .btn-container { flex-direction: row; justify-content: center; } 
-    .btn, .btn-whatsapp { width: auto; } 
-}
+    /* Estilo do holograma */
+    .hologram-container {
+        position: relative;
+        width: 150px;
+        height: 150px;
+        margin: 20px auto 40px;
+        transform-style: preserve-3d;
+        perspective: 800px;
+    }
+    .hologram-sphere {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border: 2px solid #0ff;
+        border-radius: 50%;
+        transform-style: preserve-3d;
+        animation: rotate-hologram 10s linear infinite;
+        box-shadow: 0 0 15px #0ff, inset 0 0 15px #0ff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .hologram-line {
+        position: absolute;
+        width: 150px;
+        height: 2px;
+        background: #0ff;
+        box-shadow: 0 0 5px #0ff, 0 0 10px #0ff;
+        border-radius: 2px;
+    }
+    .hologram-line:nth-child(1) { transform: rotate(0deg) translateY(0); }
+    .hologram-line:nth-child(2) { transform: rotate(90deg) translateY(0); }
+    .hologram-line:nth-child(3) { transform: rotate(45deg) translateY(0); }
+    .hologram-line:nth-child(4) { transform: rotate(-45deg) translateY(0); }
+
+    .hologram-sphere::before {
+        content: '';
+        position: absolute;
+        width: 120%;
+        height: 120%;
+        border-radius: 50%;
+        border: 1px dotted #0ff;
+        animation: hologram-pulse 2s ease-in-out infinite alternate;
+        opacity: 0.5;
+    }
+
+    @keyframes rotate-hologram {
+        from { transform: rotateY(0deg) rotateX(0deg); }
+        to { transform: rotateY(360deg) rotateX(360deg); }
+    }
+    @keyframes hologram-pulse {
+        from { transform: scale(1); opacity: 0.5; }
+        to { transform: scale(1.1); opacity: 0.8; }
+    }
+
+    .hamburger { position: absolute; top: 25px; right: 25px; font-size: 1.8em; cursor: pointer; color: #0ff; }
+    .menu { display: none; flex-direction: column; position: absolute; right: 20px; top: 60px; padding: 15px; border-radius: 10px; text-align: left; z-index: 1000; }
+    .menu a { color: white; text-decoration: none; margin-bottom: 10px; display: block; font-family: 'Orbitron', sans-serif; }
+    .menu a:hover { color: #ffdd00; text-shadow: 0 0 5px #ffdd00; }
+
+    .btn-container { margin-top: 20px; display: flex; flex-direction: column; gap: 15px; align-items: center; }
+    .btn, .btn-whatsapp {
+        padding: 18px 25px; font-size: 1.4em; font-weight: bold; border-radius: 12px; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; transition: 0.3s; justify-content: center;
+        text-transform: uppercase;
+        font-family: 'Orbitron', sans-serif;
+        letter-spacing: 1px;
+        position: relative;
+        overflow: hidden;
+        border: 1px solid transparent;
+    }
+    .btn { background: #ff0077; color: white; border-color: #ff0077; }
+    .btn:hover { background: #ff3399; transform: scale(1.05); box-shadow: 0 0 15px #ff0077; }
+    .btn-whatsapp { background: #25D366; color: white; border-color: #25D366; }
+    .btn-whatsapp:hover { background: #1ebe57; transform: scale(1.05); box-shadow: 0 0 15px #25D366; }
+    .btn i, .btn-whatsapp i { font-size: 1.2em; }
+
+    /* Features */
+    section { padding: 20px; max-width: 900px; margin: auto; }
+    .feature {
+        padding: 25px; margin-bottom: 20px; text-align: left; cursor: pointer;
+        border-radius: 12px;
+        border: 1px solid rgba(0, 255, 255, 0.2);
+        box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+        transition: transform 0.3s, box-shadow 0.3s;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        animation: fade-in 1s ease-out forwards;
+        opacity: 0;
+    }
+    .feature:nth-of-type(1) { animation-delay: 0.2s; }
+    .feature:nth-of-type(2) { animation-delay: 0.4s; }
+    .feature:nth-of-type(3) { animation-delay: 0.6s; }
+    .feature:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0 25px rgba(0, 255, 255, 0.5);
+    }
+    .feature h3 { font-size: 1.5em; margin-bottom: 5px; display: flex; align-items: center; gap: 10px; font-family: 'Orbitron', sans-serif; text-shadow: 0 0 5px #0ff; }
+    .feature p { font-size: 1.05em; color: #b2f2ff; }
+    .feature i { color: #0ff; text-shadow: 0 0 5px #0ff, 0 0 10px #0ff; animation: float 3s ease-in-out infinite; }
+    @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-5px); }
+    }
+
+    /* Patrocinadores */
+    .sponsors {
+        margin: 40px auto;
+        max-width: 900px;
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        flex-wrap: wrap;
+        animation: fade-in 1.5s ease-out forwards;
+        opacity: 0;
+        animation-delay: 0.8s;
+    }
+    .sponsor-card {
+        padding: 15px 25px;
+        border-radius: 15px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transition: 0.3s;
+        width: 180px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+    }
+    .sponsor-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+    }
+    .sponsor-card img, .sponsor-card i { max-width: 80px; margin-bottom: 10px; filter: grayscale(100%); transition: filter 0.3s; }
+    .sponsor-card:hover img, .sponsor-card:hover i { filter: grayscale(0%); }
+    .sponsor-card i { color: #b2f2ff; font-size: 50px; text-shadow: 0 0 10px #b2f2ff; }
+    .sponsor-card a { text-decoration: none; color: white; font-weight: bold; font-family: 'Orbitron', sans-serif; }
+
+    /* Botões flutuantes */
+    #whatsapp-float {
+        position: fixed; width: 60px; height: 60px; bottom: 20px; right: 20px;
+        background-color: #25D366; color: white; border-radius: 50%; text-align: center; font-size: 30px;
+        z-index: 1000; box-shadow: 0 4px 12px black; display: flex; align-items: center; justify-content: center; transition: 0.3s;
+    }
+    #whatsapp-float:hover { background-color: #1ebe57; transform: scale(1.1); box-shadow: 0 0 20px #25D366; }
+
+    /* Like & Views Container */
+    .like-views {
+        margin: 20px auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+        animation: fade-in 1s ease-out forwards;
+        opacity: 0;
+        animation-delay: 0.1s;
+    }
+    .like-views button, .like-views div {
+        color: white; padding: 12px 20px; border-radius: 15px;
+        display: flex; align-items: center; gap: 10px; font-size: 1.2em;
+        font-family: 'Orbitron', sans-serif;
+        border: 1px solid rgba(0, 255, 255, 0.2);
+        box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+    }
+    .like-views button { border: none; cursor: pointer; transition: 0.3s; }
+    .like-views button:hover { background: #ff0077; transform: scale(1.05); box-shadow: 0 0 15px #ff0077; }
+    .like-views div:hover { box-shadow: 0 0 15px rgba(0, 255, 255, 0.5); }
+    .like-views i { text-shadow: 0 0 5px #0ff; }
+
+    /* Modal */
+    #infoModal {
+        display: none;
+        position: fixed;
+        z-index: 5000;
+        left: 0; top: 0;
+        width: 100%; height: 100%;
+        background-color: rgba(0,0,0,0.8);
+        justify-content: center;
+        align-items: center;
+        animation: modal-fade-in 0.5s ease-out forwards;
+    }
+    @keyframes modal-fade-in {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    .modal-content {
+        padding: 25px; border-radius: 15px; max-width: 500px;
+        color: white; text-align: left; position: relative;
+        border: 1px solid rgba(0, 255, 255, 0.3);
+        box-shadow: 0 0 25px rgba(0, 255, 255, 0.5);
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        animation: modal-slide-in 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+    }
+    @keyframes modal-slide-in {
+        from { transform: translateY(-50px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+    .modal-content h3 { margin-top: 0; font-size: 1.8em; font-family: 'Orbitron', sans-serif; text-shadow: 0 0 5px #0ff; }
+    .modal-content p { font-size: 1.05em; color: #b2f2ff; }
+    .close-modal {
+        position: absolute; top: 10px; right: 15px;
+        font-size: 2em; cursor: pointer; color: #f0f; text-shadow: 0 0 5px #f0f;
+        transition: transform 0.3s;
+    }
+    .close-modal:hover { transform: rotate(90deg); }
+
+    /* Responsivo */
+    @media (min-width: 768px) {
+        .btn-container { flex-direction: row; justify-content: center; }
+        .btn, .btn-whatsapp { width: auto; }
+    }
 </style>
 </head>
 <body>
 
-<!-- Loader -->
+<div class="star-field"></div>
+
 <div id="loader">
     <div class="loader-title">DARK STAR AGÊNCIA</div>
     <div class="loader-container">
-        <div class="screens"></div>
-        <div class="screens"></div>
-        <div class="screens"></div>
+        <div class="loader-bar"></div>
+        <div class="loader-glow"></div>
     </div>
-    <div class="loader-subtitle">CARREGANDO AGUARDE...</div>
+    <div class="loader-subtitle">CARREGANDO DADOS...</div>
 </div>
 
 <header>
-    <h1>Dark Star Agência</h1>
-
-    <!-- Botão Like e Visualizações -->
     <div class="like-views">
-        <button id="likeBtn"><i class="fas fa-heart"></i> <span id="likeCount">0</span></button>
-        <div><i class="fas fa-eye"></i> <span id="viewCount">0</span></div>
+        <button id="likeBtn" class="glass"><i class="fas fa-heart"></i> <span id="likeCount">0</span></button>
+        <div class="glass"><i class="fas fa-eye"></i> <span id="viewCount">0</span></div>
+    </div>
+
+    <h1>Dark Star Agência</h1>
+    
+    <div class="hologram-container">
+        <div class="hologram-sphere">
+            <div class="hologram-line"></div>
+            <div class="hologram-line"></div>
+            <div class="hologram-line"></div>
+            <div class="hologram-line"></div>
+        </div>
     </div>
 
     <p class="subtitle">Transforme seu talento em ganhos reais!</p>
     <p class="agency-info">Somos uma agência oficial que realiza contratos intermediados com a Bigo Live, garantindo segurança, suporte e maximização dos seus ganhos de forma profissional.</p>
 
     <i class="fas fa-bars hamburger" onclick="toggleMenu()"></i>
-    <div class="menu" id="menu">
+    <div class="menu glass" id="menu">
         <a href="javascript:void(0)" onclick="openModal('crescimento')"><i class="fas fa-bolt"></i> Crescimento Rápido</a>
         <a href="javascript:void(0)" onclick="openModal('contratos')"><i class="fas fa-file-contract"></i> Contratos Seguros</a>
         <a href="javascript:void(0)" onclick="openModal('pagamentos')"><i class="fas fa-hand-holding-dollar"></i> Pagamentos Garantidos</a>
@@ -254,47 +458,42 @@ section { padding: 20px; max-width: 800px; margin: auto; }
 </header>
 
 <section>
-    <div class="feature" id="crescimento" onclick="openModal('crescimento')">
+    <div class="feature glass" id="crescimento" onclick="openModal('crescimento')">
         <h3><i class="fa-solid fa-bolt"></i> Crescimento Rápido</h3>
         <p>Apoio profissional para impulsionar sua audiência e ganhos no Bigo Live.</p>
     </div>
-    <div class="feature" id="contratos" onclick="openModal('contratos')">
+    <div class="feature glass" id="contratos" onclick="openModal('contratos')">
         <h3><i class="fa-solid fa-file-contract"></i> Contratos Seguros</h3>
         <p>Assinatura de contratos com respaldo e suporte oficial da plataforma.</p>
     </div>
-    <div class="feature" id="pagamentos" onclick="openModal('pagamentos')">
+    <div class="feature glass" id="pagamentos" onclick="openModal('pagamentos')">
         <h3><i class="fa-solid fa-hand-holding-dollar"></i> Pagamentos Garantidos</h3>
         <p>Receba seus pagamentos sempre em dia e com transparência total.</p>
     </div>
 </section>
 
-<!-- Seção de patrocinadores -->
 <section>
-    <h2 style="margin-bottom: 20px;">Patrocinadores Oficiais</h2>
+    <h2 style="margin-bottom: 20px; font-family: 'Orbitron', sans-serif;">Patrocinadores Oficiais</h2>
     <div class="sponsors">
-        <!-- Bigo Live -->
-        <div class="sponsor-card">
+        <div class="sponsor-card glass">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQV1YDc2Px968li3sXR1KKv0l6gln9EtBywZXo8L03X_xRG9w03LEdbNU7y&s=10" alt="Bigo Live">
             <a href="https://www.bigo.tv" target="_blank">Bigo Live</a>
         </div>
 
-        <!-- Cloudflare -->
-        <div class="sponsor-card">
+        <div class="sponsor-card glass">
             <i class="fas fa-cloud" style="font-size:50px; margin-bottom:10px;"></i>
             <a href="https://www.cloudflare.com" target="_blank">Cloudflare</a>
         </div>
 
-        <!-- Site Seguro -->
-        <div class="sponsor-card">
+        <div class="sponsor-card glass">
             <i class="fas fa-lock" style="font-size:50px; margin-bottom:10px;"></i>
             <a href="https://www.darkstaragencia.com" target="_blank">Site Seguro</a>
         </div>
     </div>
 </section>
 
-<!-- Modal -->
 <div id="infoModal">
-    <div class="modal-content">
+    <div class="modal-content glass">
         <span class="close-modal" onclick="closeModal()">&times;</span>
         <h3 id="modalTitle"></h3>
         <p id="modalText"></p>
@@ -302,7 +501,7 @@ section { padding: 20px; max-width: 800px; margin: auto; }
 </div>
 
 <footer>
-    &copy; 2025 Dark Star Agência - Todos os direitos reservados.
+    <p style="font-size: 0.9em; color: rgba(255, 255, 255, 0.5); padding: 20px;">&copy; 2025 Dark Star Agência - Todos os direitos reservados.</p>
 </footer>
 
 <a href="https://wa.me/553496741592?text=Ol%C3%A1%20quero%20ser%20contratado(a)%20no%20app%20bigo%20live" target="_blank" id="whatsapp-float">
@@ -344,7 +543,7 @@ function openModal(feature) {
     const modal = document.getElementById('infoModal');
     const title = document.getElementById('modalTitle');
     const text = document.getElementById('modalText');
-    
+
     if(feature === 'crescimento') {
         title.innerText = 'Crescimento Rápido';
         text.innerText = 'Acompanhamos seu perfil no Bigo Live e oferecemos estratégias personalizadas para aumentar sua audiência rapidamente, garantindo que você alcance novos seguidores e visualizações de forma segura e consistente.';
